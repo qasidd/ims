@@ -63,7 +63,7 @@ public class ItemControllerTest {
 		String title = "MacBook Air";
 		String price = "999.0";
 		Mockito.doReturn(id, title, price).when(itemController).getInput();
-		Item item = new Item(1L, title, Double.valueOf(price));
+		Item item = new Item(Long.valueOf(id), title, Double.valueOf(price));
 		Mockito.when(itemServices.update(item)).thenReturn(item);
 		assertEquals(item, itemController.update());
 	}

@@ -63,19 +63,19 @@ public class ItemTest {
 	}
 	
 	@Test
-	public void itemNameNullButOtherNameNotNull() {
+	public void itemTitleNullButOtherTileNotNull() {
 		item.setTitle(null);
 		assertFalse(item.equals(other));
 	}
 	
 	@Test
-	public void itemNamesNotEqual() {
+	public void itemTitlesNotEqual() {
 		other.setTitle("rhys");
 		assertFalse(item.equals(other));
 	}
 	
 	@Test
-	public void checkEqualityBetweenDifferentObjectsNullName() {
+	public void checkEqualityBetweenDifferentObjectsNullTitle() {
 		item.setTitle(null);
 		other.setTitle(null);
 		assertTrue(item.equals(other));
