@@ -27,22 +27,22 @@ public class CustomerServicesTest {
 		Mockito.verify(customerDao, Mockito.times(1)).create(customer);
 	}
 	
-//	@Test
-//	public void customerServicesRead() {
-//		customerServices.readAll();
-//		Mockito.verify(customerDao, Mockito.times(1)).readAll();
-//	}
+	@Test
+	public void customerServicesRead() {
+		customerServices.readAll();
+		Mockito.verify(customerDao, Mockito.times(1)).readAll();
+	}
 	
-//	@Test
-//	public void customerServicesUpdate() {
-//		Customer customer = new Customer("chris", "perrins");
-//		customerServices.update(customer);
-//		Mockito.verify(customerDao, Mockito.times(1)).update(customer);
-//	}
+	@Test
+	public void customerServicesUpdate() {
+		Customer customer = new Customer("chris", "perrins");
+		customerServices.update(customer);
+		Mockito.verify(customerDao, Mockito.times(1)).update(customer);
+	}
 	
-//	@Test
-//	public void customerServicesDelete() {
-//		customerServices.delete(1L);;
-//		Mockito.verify(customerDao, Mockito.times(1)).delete(1L);
-//	}
+	@Test
+	public void customerServicesDelete() {
+		customerServices.delete(1L);;
+		Mockito.verify(customerDao, Mockito.times(1)).delete(1L);
+	}
 }

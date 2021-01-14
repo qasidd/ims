@@ -33,31 +33,28 @@ public class CustomerControllerTest {
 	@InjectMocks
 	private CustomerController customerController;
 
-//	@Test
-//	public void readAllTest() {
-//		CustomerController customerController = new CustomerController(customerServices);
-//		List<Customer> customers = new ArrayList<>();
-//		customers.add(new Customer("Chris", "P"));
-//		customers.add(new Customer("Rhys", "T"));
-//		customers.add(new Customer("Nic", "J"));
-//		Mockito.when(customerServices.readAll()).thenReturn(customers);
-//		assertEquals(customers, customerController.readAll());
-//	}
+	@Test
+	public void readAllTest() {
+		CustomerController customerController = new CustomerController(customerServices);
+		List<Customer> customers = new ArrayList<>();
+		customers.add(new Customer("Chris", "P"));
+		customers.add(new Customer("Rhys", "T"));
+		customers.add(new Customer("Nic", "J"));
+		Mockito.when(customerServices.readAll()).thenReturn(customers);
+		assertEquals(customers, customerController.readAll());
+	}
 
-//	@Test
-//	public void createTest() {
-//		String firstName = "Chris";
-//		String surname = "Perrins";
-//		Mockito.doReturn(firstName, surname).when(customerController).getInput();
-//		Customer customer = new Customer(firstName, surname);
-//		Customer savedCustomer = new Customer(1L, "Chris", "Perrins");
-//		Mockito.when(customerServices.create(customer)).thenReturn(savedCustomer);
-//		assertEquals(savedCustomer, customerController.create());
-//	}
+	@Test
+	public void createTest() {
+		String firstName = "Chris";
+		String surname = "Perrins";
+		Mockito.doReturn(firstName, surname).when(customerController).getInput();
+		Customer customer = new Customer(firstName, surname);
+		Customer savedCustomer = new Customer(1L, "Chris", "Perrins");
+		Mockito.when(customerServices.create(customer)).thenReturn(savedCustomer);
+		assertEquals(savedCustomer, customerController.create());
+	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void updateTest() {
 		String id = "1";
