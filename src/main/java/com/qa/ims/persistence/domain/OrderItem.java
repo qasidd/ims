@@ -1,18 +1,18 @@
 package com.qa.ims.persistence.domain;
 
-public class OrdersItems {
+public class OrderItem {
 	
 	private Long id;
 	private Long orderId;
 	private Long itemId;
 	
-	public OrdersItems(Long id, Long orderId, Long itemId) {
+	public OrderItem(Long id, Long orderId, Long itemId) {
 		this.id = id;
 		this.orderId = orderId;
 		this.itemId = itemId;
 	}
 	
-	public OrdersItems(Long orderId, Long itemId) {
+	public OrderItem(Long orderId, Long itemId) {
 		this.orderId = orderId;
 		this.itemId = itemId;
 	}
@@ -59,7 +59,7 @@ public class OrdersItems {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrdersItems other = (OrdersItems) obj;
+		OrderItem other = (OrderItem) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
