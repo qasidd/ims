@@ -2,25 +2,25 @@ package com.qa.ims.persistence.domain;
 
 public class Item {
 	
-	private long id;
+	private Long id;
 	private String title;
-	private double price;
+	private Double price;
 	
-	public Item(String title, double price) {
+	public Item(String title, Double price) {
 		this.title = title;
 		this.price = price;
 	}
 	
-	public Item(long id, String title, double price) {
+	public Item(Long id, String title, Double price) {
 		this.id = id;
 		this.title = title;
 		this.price = price;
 	}
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -29,10 +29,10 @@ public class Item {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	
@@ -40,10 +40,8 @@ public class Item {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		long temp;
-		temp = Double.doubleToLongBits(price);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -57,9 +55,15 @@ public class Item {
 		if (getClass() != obj.getClass())
 			return false;
 		Item other = (Item) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
-		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -68,7 +72,7 @@ public class Item {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", title=" + title + ", price=" + price + "]";
