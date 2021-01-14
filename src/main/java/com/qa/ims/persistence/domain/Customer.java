@@ -41,10 +41,6 @@ public class Customer {
 		this.surname = surname;
 	}
 
-	public String toString() {
-		return "id:" + id + " first name:" + firstName + " surname:" + surname;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,4 +78,8 @@ public class Customer {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", firstName=" + firstName + ", surname=" + surname + "]";
+	}
 }
