@@ -1,7 +1,10 @@
-Coverage: 34%
-# Project Title
+Edit: 14/01/21
 
-One Paragraph of project description goes here
+# Inventory Management System (IMS)
+
+A CRUD application that allows interaction via a command-line interface. Currently will try to connect to and create/use a database called 'ims' in a local MySQL instance using JDBC.
+
+Database comprises of three tables called Customers, Items and Orders, as well as an intermediary table named Orders_Items, created to handle the many-to-many relationship between Items and Orders.
 
 ## Getting Started
 
