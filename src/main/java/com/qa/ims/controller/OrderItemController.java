@@ -48,7 +48,9 @@ public class OrderItemController implements CrudController<OrderItem>{
 		Long orderId = Long.valueOf(getInput());
 		LOGGER.info("Please enter an item id");
 		Long itemId = Long.valueOf(getInput());
-		OrderItem orderItem = orderItemService.create(new OrderItem(orderId, itemId));
+		LOGGER.info("Please enter the quantity");
+		Integer quantity = Integer.valueOf(getInput());
+		OrderItem orderItem = orderItemService.create(new OrderItem(orderId, itemId, quantity));
 		LOGGER.info("OrderItem created");
 		return orderItem;
 	}
@@ -64,7 +66,9 @@ public class OrderItemController implements CrudController<OrderItem>{
 		Long orderId = Long.valueOf(getInput());
 		LOGGER.info("Please enter an item id");
 		Long itemId = Long.valueOf(getInput());
-		OrderItem orderItem = orderItemService.update(new OrderItem(id, orderId, itemId));
+		LOGGER.info("Please enter the quantity");
+		Integer quantity = Integer.valueOf(getInput());
+		OrderItem orderItem = orderItemService.update(new OrderItem(id, orderId, itemId, quantity));
 		LOGGER.info("OrderItem Updated");
 		return orderItem;
 	}

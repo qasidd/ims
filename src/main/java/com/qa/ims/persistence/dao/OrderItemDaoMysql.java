@@ -34,8 +34,11 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 
 	OrderItem orderItemFromResultSet(ResultSet resultSet) throws SQLException {
 		Long id = resultSet.getLong("id");
-		Long customerId = resultSet.getLong("customer_id");
-		return new OrderItem(id, customerId);
+		Long orderId = resultSet.getLong("order_id");
+		Long itemId = resultSet.getLong("item_id");
+		Integer quantity = resultSet.getInt("quantity");
+		
+		return new OrderItem(id, orderId, itemId, quantity);
 	}
 
 	/**
@@ -82,7 +85,11 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 	public OrderItem create(OrderItem orderItem) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("insert into orders_items(order_id, item_id) values('" + orderItem.getOrderId() + ", " + orderItem.getItemId() + "')");
+			statement.executeUpdate("insert into orders_items(order_id, item_id, quantity) values('" 
+				+ orderItem.getOrderId() + ", " 
+				+ orderItem.getItemId() + ", " 
+				+ orderItem.getQuantity() 
+				+ "')");
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -115,7 +122,10 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 	public OrderItem update(OrderItem orderItem) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update orders_items set order_id ='" + orderItem.getOrderId() + ", item_id = " + orderItem.getItemId() + "' where id =" + orderItem.getId());
+			statement.executeUpdate("update orders_items set order_id ='" + orderItem.getOrderId()
+			+ ", item_id = " + orderItem.getItemId()
+			+ ", quantity = " + orderItem.getQuantity()
+			+ "' where id =" + orderItem.getId());
 			return readOrderItem(orderItem.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
