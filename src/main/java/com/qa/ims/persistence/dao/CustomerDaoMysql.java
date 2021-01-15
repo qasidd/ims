@@ -98,7 +98,6 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	 * 
 	 * @param id - id of the orderItem
 	 */
-	@Override
 	public Customer readById(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();

@@ -103,7 +103,6 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 	 * 
 	 * @param id - id of the orderItem
 	 */
-	@Override
 	public OrderItem readById(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();

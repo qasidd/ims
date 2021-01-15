@@ -16,6 +16,10 @@ public class ItemServices implements CrudServices<Item> {
 	public List<Item> readAll() {
 		return itemDao.readAll();
 	}
+	
+	public Item readById(Long id) {
+		return itemDao.readById(id);
+	}
 
 	public Item create(Item item) {
 		return itemDao.create(item);

@@ -98,7 +98,6 @@ public class ItemDaoMysql implements Dao<Item> {
 	 * 
 	 * @param id - id of the orderItem
 	 */
-	@Override
 	public Item readById(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();

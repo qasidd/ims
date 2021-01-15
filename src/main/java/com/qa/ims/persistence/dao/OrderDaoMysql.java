@@ -100,7 +100,8 @@ public class OrderDaoMysql implements Dao<Order> {
 	public Order readById(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders where id = " + id);) {
+				ResultSet resultSet = statement.executeQuery
+						("SELECT * FROM orders where id = " + id);) {
 			resultSet.next();
 			return orderFromResultSet(resultSet);
 		} catch (Exception e) {

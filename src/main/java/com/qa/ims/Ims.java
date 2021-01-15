@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-import com.qa.ims.controller.Action;
+import com.qa.ims.controller.EntityAction;
 import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
 import com.qa.ims.controller.ItemController;
@@ -42,8 +42,8 @@ public class Ims {
 		Domain domain = Domain.getDomain();
 		LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
 
-		Action.printActions();
-		Action action = Action.getAction();
+		EntityAction.printActions();
+		EntityAction action = EntityAction.getAction();
 
 		switch (domain) {
 		case CUSTOMER:
@@ -69,7 +69,7 @@ public class Ims {
 
 	}
 
-	public void doAction(CrudController<?> crudController, Action action) {
+	public void doAction(CrudController<?> crudController, EntityAction action) {
 		switch (action) {
 		case CREATE:
 			crudController.create();

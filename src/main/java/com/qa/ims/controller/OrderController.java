@@ -12,7 +12,7 @@ import com.qa.ims.utils.Utils;
  * Takes in order details for CRUD functionality
  *
  */
-public class OrderController implements CrudController<Order>{
+public class OrderController implements CrudController<Order> {
 
 	public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	
@@ -58,9 +58,25 @@ public class OrderController implements CrudController<Order>{
 	public Order update() {
 		LOGGER.info("Please enter the id of the order you would like to update");
 		Long id = Long.valueOf(getInput());
-		LOGGER.info("Please enter a customer ID");
-		Long customerId = Long.valueOf(getInput());
-		Order order = orderService.update(new Order(id, customerId));
+		LOGGER.info("Would you like to add or remove an item from order " + id + "?");
+		OrderAction.printActions();
+		
+		Order order = null;
+		Long itemId;
+		switch(OrderAction.getAction()) {
+		case ADD:
+			LOGGER.info("Please enter the id of the item you would like to add to order " + id);
+			itemId = Long.valueOf(getInput());
+			order = orderService.update(orderService.readById(id));
+			break;
+		case DELETE:
+			LOGGER.info("Please enter the id of the item you would like to delete from order " + id + ":");
+			// TODO: output all items with reference to the specified order id
+			itemId = Long.valueOf(getInput());
+			order = orderService.update(orderService.readById(id));
+			break;
+		}
+		
 		LOGGER.info("Order Updated");
 		return order;
 	}
