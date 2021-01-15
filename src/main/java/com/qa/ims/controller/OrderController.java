@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.services.CrudServices;
+import com.qa.ims.services.CrudServicesExtended;
 import com.qa.ims.utils.Utils;
 
 /**
@@ -16,9 +17,9 @@ public class OrderController implements CrudController<Order> {
 
 	public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	
-	private CrudServices<Order> orderService;
+	private CrudServicesExtended<Order> orderService;
 	
-	public OrderController(CrudServices<Order> orderService) {
+	public OrderController(CrudServicesExtended<Order> orderService) {
 		this.orderService = orderService;
 	}
 	
@@ -67,13 +68,13 @@ public class OrderController implements CrudController<Order> {
 		case ADD:
 			LOGGER.info("Please enter the id of the item you would like to add to order " + id);
 			itemId = Long.valueOf(getInput());
-			order = orderService.update(orderService.readById(id));
+			order = orderService.addTo(orderService.readById(id), itemId);
 			break;
 		case DELETE:
 			LOGGER.info("Please enter the id of the item you would like to delete from order " + id + ":");
 			// TODO: output all items with reference to the specified order id
 			itemId = Long.valueOf(getInput());
-			order = orderService.update(orderService.readById(id));
+			order = orderService.deleteFrom(orderService.readById(id), itemId);
 			break;
 		}
 		

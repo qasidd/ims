@@ -10,7 +10,7 @@ import com.qa.ims.utils.Utils;
  *
  */
 public enum OrderAction {
-	ADD("To add an item to an order"), DELETE("To delete an item to an order");
+	ADD("To add an item to an order"), DELETE("To delete an item from an order");
 	
 	public static final Logger LOGGER = Logger.getLogger(OrderAction.class);
 

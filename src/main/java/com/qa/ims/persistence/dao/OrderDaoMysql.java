@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.qa.ims.persistence.domain.Order;
 
-public class OrderDaoMysql implements Dao<Order> {
+public class OrderDaoMysql implements DaoExtended<Order> {
 
 	public static final Logger LOGGER = Logger.getLogger(OrderDaoMysql.class);
 
@@ -123,6 +123,35 @@ public class OrderDaoMysql implements Dao<Order> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("update orders set customer_id ='" + order.getCustomerId() + "' where id =" + order.getId());
+			return readById(order.getId());
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
+	
+	@Override
+	public Order addTo(Order order, Long itemId) {
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();) {
+			statement.executeUpdate("insert into orders_items(order_id, item_id) "
+					+ "values(" + order.getId() + ", " + itemId + ")");
+			return readById(order.getId());
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
+	
+	@Override
+	public Order deleteFrom(Order order, Long itemId) {
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();) {
+			statement.executeUpdate("delete from orders_items "
+					+ "where order_id = " + order.getId() 
+					+ " and item_id = " + itemId);
 			return readById(order.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
