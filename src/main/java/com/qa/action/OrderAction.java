@@ -1,4 +1,4 @@
-package com.qa.ims.controller;
+package com.qa.action;
 
 import org.apache.log4j.Logger;
 
@@ -9,7 +9,7 @@ import com.qa.ims.utils.Utils;
  * function to apply to an order.
  *
  */
-public enum OrderAction {
+public enum OrderAction implements Action {
 	ADD("To add an item to an order"), DELETE("To delete an item from an order");
 	
 	public static final Logger LOGGER = Logger.getLogger(OrderAction.class);

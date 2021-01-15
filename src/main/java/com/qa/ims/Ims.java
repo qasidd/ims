@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-import com.qa.ims.controller.EntityAction;
+import com.qa.action.EntityAction;
 import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
 import com.qa.ims.controller.ItemController;

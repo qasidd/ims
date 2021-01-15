@@ -1,4 +1,4 @@
-package com.qa.ims.controller;
+package com.qa.action;
 
 import org.apache.log4j.Logger;
 
@@ -9,7 +9,7 @@ import com.qa.ims.utils.Utils;
  * function to apply to an entity.
  *
  */
-public enum EntityAction {
+public enum EntityAction implements Action {
 	CREATE("To save a new item into the database"), READ("To read an item from the database"),
 	UPDATE("To change an item already in the database"), DELETE("To remove an item from the database"),
 	RETURN("To return to domain selection");
