@@ -91,7 +91,13 @@ public class OrderDaoMysql implements Dao<Order> {
 		return null;
 	}
 
-	public Order readOrder(Long id) {
+	/**
+	 * Reads an order using id from the database
+	 * 
+	 * @param id - id of the orderItem
+	 */
+	@Override
+	public Order readById(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders where id = " + id);) {
@@ -116,7 +122,7 @@ public class OrderDaoMysql implements Dao<Order> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("update orders set customer_id ='" + order.getCustomerId() + "' where id =" + order.getId());
-			return readOrder(order.getId());
+			return readById(order.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

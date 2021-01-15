@@ -98,7 +98,13 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 		return null;
 	}
 
-	public OrderItem readOrderItem(Long id) {
+	/**
+	 * Reads an orderItem using id from the database
+	 * 
+	 * @param id - id of the orderItem
+	 */
+	@Override
+	public OrderItem readById(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders_items where id = " + id);) {
@@ -126,7 +132,7 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 			+ ", item_id = " + orderItem.getItemId()
 			+ ", quantity = " + orderItem.getQuantity()
 			+ "' where id =" + orderItem.getId());
-			return readOrderItem(orderItem.getId());
+			return readById(orderItem.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

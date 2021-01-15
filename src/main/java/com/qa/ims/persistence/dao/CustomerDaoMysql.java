@@ -93,7 +93,13 @@ public class CustomerDaoMysql implements Dao<Customer> {
 		return null;
 	}
 
-	public Customer readCustomer(Long id) {
+	/**
+	 * Reads a customer using id from the database
+	 * 
+	 * @param id - id of the orderItem
+	 */
+	@Override
+	public Customer readById(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("SELECT * FROM customers where id = " + id);) {
@@ -119,7 +125,7 @@ public class CustomerDaoMysql implements Dao<Customer> {
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("update customers set first_name ='" + customer.getFirstName() + "', surname ='"
 					+ customer.getSurname() + "' where id =" + customer.getId());
-			return readCustomer(customer.getId());
+			return readById(customer.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
