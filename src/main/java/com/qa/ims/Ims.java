@@ -34,12 +34,21 @@ public class Ims {
 		LOGGER.info("What is your password");
 		String password = Utils.getInput();
 
-		init(username, password);
-
+		if (init(username, password)) {
+			while (entityMenu(username, password));
+		}
+	}
+	
+	public boolean entityMenu(String username, String password) {
+		System.out.print("\n");
 		LOGGER.info("Which entity would you like to use?");
 		Domain.printDomains();
 
 		Domain domain = Domain.getDomain();
+		if (domain == Domain.STOP) { 
+			LOGGER.info("Bye!");
+			return false;
+		}
 		LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
 
 		EntityAction.printActions();
@@ -61,12 +70,11 @@ public class Ims {
 					new OrderServices(new OrderDaoMysql(username, password)));
 			doAction(orderController, action);
 			break;
-		case STOP:
-			break;
 		default:
 			break;
 		}
-
+		
+		return true;
 	}
 
 	public void doAction(CrudController<?> crudController, EntityAction action) {
@@ -97,8 +105,8 @@ public class Ims {
 	 * @param username
 	 * @param password
 	 */
-	public void init(String username, String password) {
-		init("jdbc:mysql://localhost:3306/", username, password, "src/main/resources/sql-schema.sql");
+	public boolean init(String username, String password) {
+		return init("jdbc:mysql://localhost:3306/", username, password, "src/main/resources/sql-schema.sql");
 	}
 
 	public String readFile(String fileLocation) {
@@ -121,7 +129,7 @@ public class Ims {
 	/**
 	 * To initialise the database with the schema needed to run the application
 	 */
-	public void init(String jdbcConnectionUrl, String username, String password, String fileLocation) {
+	public boolean init(String jdbcConnectionUrl, String username, String password, String fileLocation) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				BufferedReader br = new BufferedReader(new FileReader(fileLocation));) {
 			String string;
@@ -135,7 +143,10 @@ public class Ims {
 				LOGGER.debug(ele);
 			}
 			LOGGER.error(e.getMessage());
+			return false;
 		}
+		
+		return true;
 	}
 
 }

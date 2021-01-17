@@ -132,7 +132,7 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 	}
 	
 	@Override
-	public Order addTo(Order order, Long itemId) {
+	public Order addTo(Order order, long itemId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("insert into orders_items(order_id, item_id) "
@@ -146,7 +146,7 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 	}
 	
 	@Override
-	public Order deleteFrom(Order order, Long itemId) {
+	public Order deleteFrom(Order order, long itemId) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("delete from orders_items "
