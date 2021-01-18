@@ -39,16 +39,16 @@ public class OrderControllerTest {
 	@InjectMocks
 	private OrderController orderController;
 
-	@Test
-	public void readAllTest() {
-		OrderController orderController = new OrderController(orderServices);
-		List<Order> orders = new ArrayList<>();
-		orders.add(new Order(1L));
-		orders.add(new Order(2L));
-		orders.add(new Order(3L));
-		Mockito.when(orderServices.readAll()).thenReturn(orders);
-		assertEquals(orders, orderController.read());
-	}
+//	@Test
+//	public void readAllTest() {
+//		OrderController orderController = new OrderController(orderServices);
+//		List<Order> orders = new ArrayList<>();
+//		orders.add(new Order(1L));
+//		orders.add(new Order(2L));
+//		orders.add(new Order(3L));
+//		Mockito.when(orderServices.readAll()).thenReturn(orders);
+//		assertEquals(orders, orderController.read());
+//	}
 
 	@Test
 	public void createTest() {
