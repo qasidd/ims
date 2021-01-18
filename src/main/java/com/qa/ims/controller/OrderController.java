@@ -28,6 +28,11 @@ public class OrderController implements CrudController<Order> {
 		return Utils.getInput();
 	}
 	
+	// easier for testing
+	OrderAction getAction() {
+		return OrderAction.getAction();
+	}
+	
 	/**
 	 * Reads all orders to the logger
 	 */
@@ -64,7 +69,7 @@ public class OrderController implements CrudController<Order> {
 		
 		Order order = null;
 		Long itemId;
-		switch(OrderAction.getAction()) {
+		switch(getAction()) {
 		case ADD:
 			LOGGER.info("Please enter the id of the item you would like to add to order " + id);
 			itemId = Long.valueOf(getInput());
