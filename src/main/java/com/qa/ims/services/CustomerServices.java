@@ -16,6 +16,10 @@ public class CustomerServices implements CrudServices<Customer> {
 	public List<Customer> readAll() {
 		return customerDao.readAll();
 	}
+	
+	public Customer readById(Long id) {
+		return customerDao.readById(id);
+	}
 
 	public Customer create(Customer customer) {
 		return customerDao.create(customer);

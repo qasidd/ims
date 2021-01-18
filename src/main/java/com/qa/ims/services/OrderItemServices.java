@@ -16,6 +16,10 @@ public class OrderItemServices implements CrudServices<OrderItem> {
 	public List<OrderItem> readAll() {
 		return orderItemDao.readAll();
 	}
+	
+	public OrderItem readById(Long id) {
+		return orderItemDao.readById(id);
+	}
 
 	public OrderItem create(OrderItem orderItem) {
 		return orderItemDao.create(orderItem);

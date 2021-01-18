@@ -4,27 +4,33 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.qa.action.OrderAction;
 import com.qa.ims.persistence.domain.Order;
-import com.qa.ims.services.CrudServices;
+import com.qa.ims.services.CrudServicesExtended;
 import com.qa.ims.utils.Utils;
 
 /**
  * Takes in order details for CRUD functionality
  *
  */
-public class OrderController implements CrudController<Order>{
+public class OrderController implements CrudController<Order> {
 
 	public static final Logger LOGGER = Logger.getLogger(OrderController.class);
 	
-	private CrudServices<Order> orderService;
+	private CrudServicesExtended<Order> orderService;
 	
-	public OrderController(CrudServices<Order> orderService) {
+	public OrderController(CrudServicesExtended<Order> orderService) {
 		this.orderService = orderService;
 	}
 	
 
 	String getInput() {
 		return Utils.getInput();
+	}
+	
+	// easier for testing
+	OrderAction getAction() {
+		return OrderAction.getAction();
 	}
 	
 	/**
@@ -58,9 +64,24 @@ public class OrderController implements CrudController<Order>{
 	public Order update() {
 		LOGGER.info("Please enter the id of the order you would like to update");
 		Long id = Long.valueOf(getInput());
-		LOGGER.info("Please enter a customer ID");
-		Long customerId = Long.valueOf(getInput());
-		Order order = orderService.update(new Order(id, customerId));
+		LOGGER.info("Would you like to add or remove an item from order " + id + "?");
+		OrderAction.printActions();
+		
+		Order order = null;
+		Long itemId;
+		switch(getAction()) {
+		case ADD:
+			LOGGER.info("Please enter the id of the item you would like to add to order " + id);
+			itemId = Long.valueOf(getInput());
+			order = orderService.addTo(orderService.readById(id), itemId);
+			break;
+		case DELETE:
+			LOGGER.info("Please enter the id of the item you would like to delete from order " + id + ":");
+			itemId = Long.valueOf(getInput());
+			order = orderService.deleteFrom(orderService.readById(id), itemId);
+			break;
+		}
+		
 		LOGGER.info("Order Updated");
 		return order;
 	}
@@ -73,6 +94,7 @@ public class OrderController implements CrudController<Order>{
 		LOGGER.info("Please enter the id of the order you would like to delete");
 		Long id = Long.valueOf(getInput());
 		orderService.delete(id);
+		LOGGER.info("Order Deleted");
 	}
 	
 }

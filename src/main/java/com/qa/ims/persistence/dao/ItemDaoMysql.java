@@ -93,7 +93,12 @@ public class ItemDaoMysql implements Dao<Item> {
 		return null;
 	}
 
-	public Item readItem(Long id) {
+	/**
+	 * Reads an item using id from the database
+	 * 
+	 * @param id - id of the orderItem
+	 */
+	public Item readById(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("SELECT * FROM items where id = " + id);) {
@@ -119,7 +124,7 @@ public class ItemDaoMysql implements Dao<Item> {
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("update items set title ='" + item.getTitle() + "', price ='"
 					+ item.getPrice() + "' where id =" + item.getId());
-			return readItem(item.getId());
+			return readById(item.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

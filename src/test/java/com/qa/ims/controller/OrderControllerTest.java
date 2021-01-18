@@ -4,7 +4,9 @@ package com.qa.ims.controller;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +16,9 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.qa.action.OrderAction;
 import com.qa.ims.persistence.domain.Order;
+import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.services.OrderServices;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -57,14 +61,32 @@ public class OrderControllerTest {
 	}
 
 	@Test
-	public void updateTest() {
+	public void updateAddToTest() {
 		String id = "1";
-		String customerId = "2";
-		Mockito.doReturn(id, customerId).when(orderController).getInput();
-		Order order = new Order(Long.valueOf(id), Long.valueOf(customerId));
+		OrderAction action = OrderAction.ADD;
+		String itemId = "2";
+		
+		Mockito.doReturn(id).when(orderController).getInput();
+		Mockito.doReturn(action).when(orderController).getAction();
+		Mockito.doReturn(itemId).when(orderController).getInput();
+		
+		Set<OrderItem> set = new HashSet<>();
+		set.add(new OrderItem(Long.valueOf(id), Long.valueOf(itemId), 1));
+		Order order = new Order(Long.valueOf(id), null, set);
 		Mockito.when(orderServices.update(order)).thenReturn(order);
 		assertEquals(order, orderController.update());
 	}
+	
+//	@Test
+//	public void updateDeleteFromTest() {
+//		String id = "1";
+//		String action = "delete";
+//		String customerId = "2";
+//		Mockito.doReturn(id, customerId).when(orderController).getInput();
+//		Order order = new Order(Long.valueOf(id), Long.valueOf(customerId));
+//		Mockito.when(orderServices.update(order)).thenReturn(order);
+//		assertEquals(order, orderController.update());
+//	}
 
 	/**
 	 * Delete doesn't return anything, so we can just verify that it calls the
