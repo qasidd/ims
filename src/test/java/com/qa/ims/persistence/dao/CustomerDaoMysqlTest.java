@@ -18,7 +18,8 @@ public class CustomerDaoMysqlTest {
 	
 	public static final Logger LOGGER = Logger.getLogger(CustomerDaoMysql.class);
 	
-	private static String jdbcConnectionUrl = "jdbc:mysql://localhost:3306/ims_test";
+	private static String jdbcConnectionUrl = "jdbc:mysql://localhost:3306/";
+	private static String jdbcConnectionUrlTest = jdbcConnectionUrl + "ims_test";
 	private static String username = "root";
 	private static String password = "root";
 
@@ -30,7 +31,7 @@ public class CustomerDaoMysqlTest {
 	
 	@Before
 	public void setup() {
-		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrlTest, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("delete from customers;");
 		} catch (Exception e) {
@@ -42,16 +43,16 @@ public class CustomerDaoMysqlTest {
 	@Test
 	public void createTest() {
 		// create an instance of the class
-		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(jdbcConnectionUrl, username, password);
+		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(jdbcConnectionUrlTest, username, password);
 		
 		// setting values
-		String fn = "jim";
-		String sn = "bob";
+		String firstName = "Jim";
+		String surname = "Bob";
 		
 		// create a new customer
-		Customer customer = new Customer(fn, sn);
+		Customer customer = new Customer(firstName, surname);
 		// customer to compare to
-		Customer savedCustomer = new Customer(1L, fn, sn);
+		Customer savedCustomer = new Customer(1L, firstName, surname);
 		
 		customer = customerDaoMysql.create(customer);
 		assertEquals(savedCustomer, customer);
