@@ -36,9 +36,8 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 		Long id = resultSet.getLong("id");
 		Long orderId = resultSet.getLong("order_id");
 		Long itemId = resultSet.getLong("item_id");
-		Integer quantity = resultSet.getInt("quantity");
 		
-		return new OrderItem(id, orderId, itemId, quantity);
+		return new OrderItem(id, orderId, itemId);
 	}
 
 	/**
@@ -51,7 +50,7 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("select * from orders_items");) {
-			ArrayList<OrderItem> orderItems = new ArrayList<>();
+			List<OrderItem> orderItems = new ArrayList<>();
 			while (resultSet.next()) {
 				orderItems.add(orderItemFromResultSet(resultSet));
 			}
@@ -88,7 +87,6 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 			statement.executeUpdate("insert into orders_items(order_id, item_id, quantity) values('" 
 				+ orderItem.getOrderId() + ", " 
 				+ orderItem.getItemId() + ", " 
-				+ orderItem.getQuantity() 
 				+ "')");
 			return readLatest();
 		} catch (Exception e) {
@@ -129,7 +127,6 @@ public class OrderItemDaoMysql implements Dao<OrderItem> {
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("update orders_items set order_id ='" + orderItem.getOrderId()
 			+ ", item_id = " + orderItem.getItemId()
-			+ ", quantity = " + orderItem.getQuantity()
 			+ "' where id =" + orderItem.getId());
 			return readById(orderItem.getId());
 		} catch (Exception e) {

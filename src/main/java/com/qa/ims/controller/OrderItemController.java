@@ -31,7 +31,7 @@ public class OrderItemController implements CrudController<OrderItem>{
 	 * Reads all orderItems to the logger
 	 */
 	@Override
-	public List<OrderItem> readAll() {
+	public List<OrderItem> read() {
 		List<OrderItem> orderItems = orderItemService.readAll();
 		for(OrderItem orderItem: orderItems) {
 			LOGGER.info(orderItem.toString());
@@ -48,9 +48,7 @@ public class OrderItemController implements CrudController<OrderItem>{
 		Long orderId = Long.valueOf(getInput());
 		LOGGER.info("Please enter an item id");
 		Long itemId = Long.valueOf(getInput());
-		LOGGER.info("Please enter the quantity");
-		Integer quantity = Integer.valueOf(getInput());
-		OrderItem orderItem = orderItemService.create(new OrderItem(orderId, itemId, quantity));
+		OrderItem orderItem = orderItemService.create(new OrderItem(orderId, itemId));
 		LOGGER.info("OrderItem created");
 		return orderItem;
 	}
@@ -66,9 +64,7 @@ public class OrderItemController implements CrudController<OrderItem>{
 		Long orderId = Long.valueOf(getInput());
 		LOGGER.info("Please enter an item id");
 		Long itemId = Long.valueOf(getInput());
-		LOGGER.info("Please enter the quantity");
-		Integer quantity = Integer.valueOf(getInput());
-		OrderItem orderItem = orderItemService.update(new OrderItem(id, orderId, itemId, quantity));
+		OrderItem orderItem = orderItemService.update(new OrderItem(id, orderId, itemId));
 		LOGGER.info("OrderItem Updated");
 		return orderItem;
 	}

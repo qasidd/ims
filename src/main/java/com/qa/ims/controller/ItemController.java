@@ -27,7 +27,7 @@ public class ItemController implements CrudController<Item> {
 	 * Reads all items to the logger
 	 */
 	@Override
-	public List<Item> readAll() {
+	public List<Item> read() {
 		List<Item> items = itemService.readAll();
 		for(Item item: items) {
 			LOGGER.info(item.toString());

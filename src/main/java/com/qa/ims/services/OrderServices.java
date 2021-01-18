@@ -30,16 +30,20 @@ public class OrderServices implements CrudServicesExtended<Order> {
 		return orderDao.update(order);
 	}
 
-	public Order addTo(Order order, Long itemId) {
-		return orderDao.addTo(order, itemId);
+	public Order addTo(Long orderId, Long itemId) {
+		return orderDao.addTo(orderId, itemId);
 	}
 
-	public Order deleteFrom(Order order, Long itemId) {
-		return orderDao.deleteFrom(order, itemId);
+	public Order deleteFrom(Long orderId, Long itemId) {
+		return orderDao.deleteFrom(orderId, itemId);
 	}
 
 	public void delete(Long id) {
 		orderDao.delete(id);
+	}
+	
+	public double calculateCost(Order order) {
+		return orderDao.calculateCost(order);
 	}
 
 }

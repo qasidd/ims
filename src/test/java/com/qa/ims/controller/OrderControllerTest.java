@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.qa.action.OrderAction;
+import com.qa.action.OrderUpdateAction;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.services.OrderServices;
@@ -47,7 +47,7 @@ public class OrderControllerTest {
 		orders.add(new Order(2L));
 		orders.add(new Order(3L));
 		Mockito.when(orderServices.readAll()).thenReturn(orders);
-		assertEquals(orders, orderController.readAll());
+		assertEquals(orders, orderController.read());
 	}
 
 	@Test
@@ -63,16 +63,16 @@ public class OrderControllerTest {
 	@Test
 	public void updateAddToTest() {
 		String id = "1";
-		OrderAction action = OrderAction.ADD;
+		OrderUpdateAction action = OrderUpdateAction.ADD;
 		String itemId = "2";
 		
 		Mockito.doReturn(id).when(orderController).getInput();
-		Mockito.doReturn(action).when(orderController).getAction();
+		Mockito.doReturn(action).when(orderController).getUpdateAction();
 		Mockito.doReturn(itemId).when(orderController).getInput();
 		
-		Set<OrderItem> set = new HashSet<>();
-		set.add(new OrderItem(Long.valueOf(id), Long.valueOf(itemId), 1));
-		Order order = new Order(Long.valueOf(id), null, set);
+		List<OrderItem> list = new ArrayList<>();
+		list.add(new OrderItem(Long.valueOf(id), Long.valueOf(itemId)));
+		Order order = new Order(Long.valueOf(id), null, list);
 		Mockito.when(orderServices.update(order)).thenReturn(order);
 		assertEquals(order, orderController.update());
 	}

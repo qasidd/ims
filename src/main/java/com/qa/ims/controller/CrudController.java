@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface CrudController<T> {
     
-    List<T> readAll();
+    List<T> read();
      
     T create();
      

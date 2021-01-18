@@ -16,8 +16,8 @@ public class OrderItemTest {
 	
 	@Before
 	public void setUp() {
-		orderItem = new OrderItem(1L, 1L, 2L, 3);
-		other = new OrderItem(1L, 1L, 2L, 3);
+		orderItem = new OrderItem(1L, 1L, 2L);
+		other = new OrderItem(1L, 1L, 2L);
 	}
 	
 	@Test
@@ -25,7 +25,6 @@ public class OrderItemTest {
 		assertNotNull(orderItem.getId());
 		assertNotNull(orderItem.getOrderId());
 		assertNotNull(orderItem.getItemId());
-		assertNotNull(orderItem.getQuantity());
 		
 		orderItem.setId(null);
 		assertNull(orderItem.getId());
@@ -33,8 +32,6 @@ public class OrderItemTest {
 		assertNull(orderItem.getOrderId());
 		orderItem.setItemId(null);
 		assertNull(orderItem.getItemId());
-		orderItem.setQuantity(null);
-		assertNull(orderItem.getQuantity());
 	}
 	
 	@Test
@@ -52,7 +49,6 @@ public class OrderItemTest {
 		assertEquals(1L, orderItem.getId(), 0);
 		assertEquals(1L, orderItem.getOrderId(), 0);
 		assertEquals(2L, orderItem.getItemId(), 0);
-		assertEquals(3, orderItem.getQuantity(), 0);
 	}
 	
 	@Test
@@ -123,27 +119,8 @@ public class OrderItemTest {
 	}
 	
 	@Test
-	public void nullQuantity() {
-		orderItem.setQuantity(null);
-		assertFalse(orderItem.equals(other));
-	}
-	
-	@Test
-	public void nullQuantityOnBoth() {
-		orderItem.setQuantity(null);
-		other.setQuantity(null);
-		assertTrue(orderItem.equals(other));
-	}
-	
-	@Test
-	public void otherQuantityDifferent() {
-		other.setQuantity(5);
-		assertFalse(orderItem.equals(other));
-	}
-	
-	@Test
 	public void constructorWithoutId() {
-		OrderItem orderItem = new OrderItem(1L, 2L, 3);
+		OrderItem orderItem = new OrderItem(1L, 2L);
 		assertNull(orderItem.getId());
 		assertNotNull(orderItem.getOrderId());
 		assertNotNull(orderItem.getItemId());
