@@ -72,7 +72,6 @@ public class OrderController implements CrudController<Order> {
 			break;
 		case DELETE:
 			LOGGER.info("Please enter the id of the item you would like to delete from order " + id + ":");
-			// TODO: output all items with reference to the specified order id
 			itemId = Long.valueOf(getInput());
 			order = orderService.deleteFrom(orderService.readById(id), itemId);
 			break;

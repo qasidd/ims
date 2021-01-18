@@ -9,17 +9,21 @@ public class Order {
 	private Long customerId;
 	private Set<OrderItem> orderItemSet;
 	
-	{
-		orderItemSet = new HashSet<>();
+	public Order(Long id, Long customerId, Set<OrderItem> orderItemSet) {
+		this.id = id;
+		this.customerId = customerId;
+		this.orderItemSet = orderItemSet;
 	}
 	
 	public Order(Long id, Long customerId) {
 		this.id = id;
 		this.customerId = customerId;
+		orderItemSet = new HashSet<>();
 	}
 	
 	public Order(Long customerId) {
 		this.customerId = customerId;
+		orderItemSet = new HashSet<>();
 	}
 	
 	public Long getId() {
