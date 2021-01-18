@@ -201,5 +201,23 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 			LOGGER.error(e.getMessage());
 		}
 	}
+	
+	@Override
+	public double calculateCost(Order order) {
+		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery
+						("SELECT sum(price) as total_cost "
+								+ "FROM items JOIN orders_items "
+								+ "WHERE items.id = orders_items.item_id AND order_id = " + order.getId());) {
+			resultSet.next();
+			int totalCost = resultSet.getInt("total_cost");
+			return totalCost;
+		} catch (Exception e) {
+			LOGGER.debug(e.getStackTrace());
+			LOGGER.error(e.getMessage());
+		}
+		return -1;
+	}
 
 }

@@ -40,7 +40,7 @@ public class OrderController implements CrudController<Order> {
 	}
 	
 	/**
-	 * Reads all orders to the logger
+	 * Reads either all orders or one specific order to the logger
 	 */
 	@Override
 	public List<Order> read() {
@@ -49,7 +49,7 @@ public class OrderController implements CrudController<Order> {
 		
 		List<Order> orderList = new ArrayList<>();
 		Long orderId;
-		switch (getReadAction() ) {
+		switch (getReadAction()) {
 		case ALL:
 			orderList = orderService.readAll();
 			for(Order order: orderList) {
@@ -59,8 +59,11 @@ public class OrderController implements CrudController<Order> {
 		case ONE:
 			LOGGER.info("Please enter the id of the order you would like to view the basket of");
 			orderId = Long.valueOf(getInput());
-			orderList.add(orderService.readById(orderId));
+			Order order = orderService.readById(orderId);
+			double cost = orderService.calculateCost(order);
+			orderList.add(order);
 			LOGGER.info(orderList.get(0));
+			LOGGER.info(String.format("Total: £%.2f", cost));
 			break;
 		default:
 			break;

@@ -41,5 +41,9 @@ public class OrderServices implements CrudServicesExtended<Order> {
 	public void delete(Long id) {
 		orderDao.delete(id);
 	}
+	
+	public double calculateCost(Order order) {
+		return orderDao.calculateCost(order);
+	}
 
 }

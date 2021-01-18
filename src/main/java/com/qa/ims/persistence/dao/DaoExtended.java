@@ -6,4 +6,5 @@ public interface DaoExtended<T> extends Dao<T> {
 	
 	T deleteFrom(T t, long id);
 
+	double calculateCost(T t);
 }
