@@ -52,8 +52,7 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 		while (resultSetOrderItems.next()) {
 			orderItemId = resultSetOrderItems.getLong("id");
 			itemId = resultSetOrderItems.getLong("item_id");
-			quantity = resultSetOrderItems.getInt("quantity");
-			orderItems.add(new OrderItem(orderItemId, orderId, itemId, quantity));
+			orderItems.add(new OrderItem(orderItemId, orderId, itemId));
 		}
 		
 		return new Order(orderId, customerId, orderItems);
@@ -178,7 +177,8 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("delete from orders_items "
 					+ "where order_id = " + order.getId() 
-					+ " and item_id = " + itemId);
+					+ " and item_id = " + itemId
+					+ " limit 1");
 			return readById(order.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
@@ -187,13 +187,13 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 		return null;
 	}
 	
-	public boolean checkIfItemAlreadyExistsInOrder(Order order, long itemId) {
-		for (OrderItem orderItem : order.getOrderItemSet()) {
-			if (orderItem.getItemId() == itemId) return true;
-		}
-		
-		return false;
-	}
+//	public boolean checkIfItemAlreadyExistsInOrder(Order order, long itemId) {
+//		for (OrderItem orderItem : order.getOrderItemSet()) {
+//			if (orderItem.getItemId() == itemId) return true;
+//		}
+//		
+//		return false;
+//	}
 
 	/**
 	 * Deletes a order in the database
