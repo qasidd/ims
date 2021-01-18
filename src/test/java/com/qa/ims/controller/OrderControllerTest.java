@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.qa.action.OrderAction;
+import com.qa.action.OrderUpdateAction;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.services.OrderServices;
@@ -63,7 +63,7 @@ public class OrderControllerTest {
 	@Test
 	public void updateAddToTest() {
 		String id = "1";
-		OrderAction action = OrderAction.ADD;
+		OrderUpdateAction action = OrderUpdateAction.ADD;
 		String itemId = "2";
 		
 		Mockito.doReturn(id).when(orderController).getInput();

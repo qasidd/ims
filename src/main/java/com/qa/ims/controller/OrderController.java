@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.qa.action.OrderAction;
+import com.qa.action.OrderUpdateAction;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.services.CrudServicesExtended;
 import com.qa.ims.utils.Utils;
@@ -29,8 +29,8 @@ public class OrderController implements CrudController<Order> {
 	}
 	
 	// easier for testing
-	OrderAction getAction() {
-		return OrderAction.getAction();
+	OrderUpdateAction getAction() {
+		return OrderUpdateAction.getAction();
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class OrderController implements CrudController<Order> {
 		LOGGER.info("Please enter the id of the order you would like to update");
 		Long id = Long.valueOf(getInput());
 		LOGGER.info("Would you like to add or remove an item from order " + id + "?");
-		OrderAction.printActions();
+		OrderUpdateAction.printActions();
 		
 		Order order = null;
 		Long itemId;

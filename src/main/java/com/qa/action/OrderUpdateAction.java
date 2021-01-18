@@ -9,16 +9,16 @@ import com.qa.ims.utils.Utils;
  * function to apply to an order.
  *
  */
-public enum OrderAction implements Action {
+public enum OrderUpdateAction implements Action {
 	ADD("To add an item to an order"), DELETE("To delete an item from an order");
 	
-	public static final Logger LOGGER = Logger.getLogger(OrderAction.class);
+	public static final Logger LOGGER = Logger.getLogger(OrderUpdateAction.class);
 
 	private String description;
 	
-	private OrderAction() { }
+	private OrderUpdateAction() { }
 	
-	OrderAction(String description) {
+	OrderUpdateAction(String description) {
 		this.description = description;
 	}
 	
@@ -33,7 +33,7 @@ public enum OrderAction implements Action {
 	 * Prints out all possible actions
 	 */
 	public static void printActions() {
-		for (OrderAction action : OrderAction.values()) {
+		for (OrderUpdateAction action : OrderUpdateAction.values()) {
 			LOGGER.info(action.getDescription());
 		}
 	}
@@ -44,11 +44,11 @@ public enum OrderAction implements Action {
 	 * 
 	 * @return Action type
 	 */
-	public static OrderAction getAction() {
-		OrderAction action;
+	public static OrderUpdateAction getAction() {
+		OrderUpdateAction action;
 		while (true) {
 			try {
-				action = OrderAction.valueOf(Utils.getInput().toUpperCase());
+				action = OrderUpdateAction.valueOf(Utils.getInput().toUpperCase());
 				break;
 			} catch (IllegalArgumentException e) {
 				LOGGER.error("Invalid selection please try again");
