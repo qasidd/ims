@@ -95,7 +95,7 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 	}
 
 	/**
-	 * Creates a order in the database
+	 * Creates an order in the database
 	 * 
 	 * @param order - takes in a order object. id will be ignored
 	 */
@@ -113,37 +113,18 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 	}
 
 	/**
-	 * Reads an order using id from the database
-	 * 
+	 * Reads an order using id from the database, as well as a set of items associated with the order
+	 * in the intermediary table
 	 * @param id - id of the orderItem
 	 */
 	@Override
 	public Order readById(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
-				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery
-						("SELECT * FROM orders where id = " + id);) {
-			resultSet.next();
-			return orderFromResultSet(resultSet);
-		} catch (Exception e) {
-			LOGGER.debug(e.getStackTrace());
-			LOGGER.error(e.getMessage());
-		}
-		return null;
-	}
-	
-	/**
-	 * Reads an order using id from the database, as well as a set of items associated with the orders
-	 * in the intermediary table
-	 * 
-	 * @param id - id of the orderItem
-	 */
-	public Order readByIdWithOrderItems(long id) {
-		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
-				Statement statement = connection.createStatement();
-				ResultSet resultSetOrder = statement.executeQuery
+				Statement statementOne = connection.createStatement();
+				Statement statementTwo = connection.createStatement();
+				ResultSet resultSetOrder = statementOne.executeQuery
 						("SELECT * FROM orders where id = " + id);
-				ResultSet resultSetOrderItems = statement.executeQuery
+				ResultSet resultSetOrderItems = statementTwo.executeQuery
 						("SELECT * FROM orders_items where order_id = " + id);) {
 			resultSetOrder.next();
 			resultSetOrderItems.next();
@@ -181,7 +162,7 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("insert into orders_items(order_id, item_id) "
 					+ "values(" + order.getId() + ", " + itemId + ")");
-			return readByIdWithOrderItems(order.getId());
+			return readById(order.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
@@ -196,7 +177,7 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 			statement.executeUpdate("delete from orders_items "
 					+ "where order_id = " + order.getId() 
 					+ " and item_id = " + itemId);
-			return readByIdWithOrderItems(order.getId());
+			return readById(order.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());
