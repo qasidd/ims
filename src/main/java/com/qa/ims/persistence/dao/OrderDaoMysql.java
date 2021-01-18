@@ -157,7 +157,8 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 	}
 	
 	@Override
-	public Order addTo(Order order, long itemId) {
+	public Order addTo(long id, long itemId) {
+		Order order = readById(id);
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("insert into orders_items(order_id, item_id) "
@@ -171,7 +172,8 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 	}
 	
 	@Override
-	public Order deleteFrom(Order order, long itemId) {
+	public Order deleteFrom(long id, long itemId) {
+		Order order = readById(id);
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("delete from orders_items "
@@ -183,6 +185,14 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 			LOGGER.error(e.getMessage());
 		}
 		return null;
+	}
+	
+	public boolean checkIfItemAlreadyExistsInOrder(Order order, long itemId) {
+		for (OrderItem orderItem : order.getOrderItemSet()) {
+			if (orderItem.getItemId() == itemId) return true;
+		}
+		
+		return false;
 	}
 
 	/**

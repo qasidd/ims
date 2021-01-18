@@ -100,12 +100,12 @@ public class OrderController implements CrudController<Order> {
 		case ADD:
 			LOGGER.info("Please enter the id of the item you would like to add to order " + id);
 			itemId = Long.valueOf(getInput());
-			order = orderService.addTo(orderService.readById(id), itemId);
+			order = orderService.addTo(id, itemId);
 			break;
 		case DELETE:
 			LOGGER.info("Please enter the id of the item you would like to delete from order " + id + ":");
 			itemId = Long.valueOf(getInput());
-			order = orderService.deleteFrom(orderService.readById(id), itemId);
+			order = orderService.deleteFrom(id, itemId);
 			break;
 		}
 		

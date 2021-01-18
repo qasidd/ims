@@ -2,9 +2,9 @@ package com.qa.ims.services;
 
 public interface CrudServicesExtended<T> extends CrudServices<T> {
 	
-	T addTo(T t, Long id);
+	T addTo(Long id, Long idToBeAdded);
 	
-	T deleteFrom(T t, Long id);
+	T deleteFrom(Long id, Long idToBeDeleted);
 	
 	double calculateCost(T t);
 }
