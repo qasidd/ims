@@ -39,7 +39,7 @@ public class Ims {
 		}
 	}
 	
-	public boolean entityMenu(String username, String password) {
+	private boolean entityMenu(String username, String password) {
 		System.out.print("\n");
 		LOGGER.info("Which entity would you like to use?");
 		Domain.printDomains();
@@ -77,7 +77,7 @@ public class Ims {
 		return true;
 	}
 
-	public void doAction(CrudController<?> crudController, EntityAction action) {
+	private void doAction(CrudController<?> crudController, EntityAction action) {
 		switch (action) {
 		case CREATE:
 			crudController.create();
