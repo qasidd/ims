@@ -46,9 +46,8 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 		Long customerId = resultSetOrder.getLong("customer_id");
 		Long orderItemId;
 		Long itemId;
-		Integer quantity;
 		
-		Set<OrderItem> orderItems = new HashSet<>();
+		List<OrderItem> orderItems = new ArrayList<>();
 		while (resultSetOrderItems.next()) {
 			orderItemId = resultSetOrderItems.getLong("id");
 			itemId = resultSetOrderItems.getLong("item_id");
@@ -126,7 +125,6 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 				ResultSet resultSetOrderItems = statementTwo.executeQuery
 						("SELECT * FROM orders_items where order_id = " + id);) {
 			resultSetOrder.next();
-			resultSetOrderItems.next();
 			return orderFromResultSet(resultSetOrder, resultSetOrderItems);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());

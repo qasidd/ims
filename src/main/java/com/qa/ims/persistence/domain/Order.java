@@ -1,29 +1,29 @@
 package com.qa.ims.persistence.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 	
 	private Long id;
 	private Long customerId;
-	private Set<OrderItem> orderItemSet;
+	private List<OrderItem> orderItemList;
 	
-	public Order(Long id, Long customerId, Set<OrderItem> orderItemSet) {
+	public Order(Long id, Long customerId, List<OrderItem> orderItemList) {
 		this.id = id;
 		this.customerId = customerId;
-		this.orderItemSet = orderItemSet;
+		this.orderItemList = orderItemList;
 	}
 	
 	public Order(Long id, Long customerId) {
 		this.id = id;
 		this.customerId = customerId;
-		orderItemSet = new HashSet<>();
+		orderItemList = new ArrayList<>();
 	}
 	
 	public Order(Long customerId) {
 		this.customerId = customerId;
-		orderItemSet = new HashSet<>();
+		orderItemList = new ArrayList<>();
 	}
 	
 	public Long getId() {
@@ -42,12 +42,12 @@ public class Order {
 		this.customerId = customerId;
 	}
 
-	public Set<OrderItem> getOrderItemSet() {
-		return orderItemSet;
+	public List<OrderItem> getOrderItemList() {
+		return orderItemList;
 	}
 	
-	public void setOrderItemSet(Set<OrderItem> orderItemSet) {
-		this.orderItemSet = orderItemSet;
+	public void setOrderItemList(List<OrderItem> orderItemList) {
+		this.orderItemList = orderItemList;
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class Order {
 		int result = 1;
 		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((orderItemSet == null) ? 0 : orderItemSet.hashCode());
+		result = prime * result + ((orderItemList == null) ? 0 : orderItemList.hashCode());
 		return result;
 	}
 
@@ -79,16 +79,16 @@ public class Order {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (orderItemSet == null) {
-			if (other.orderItemSet != null)
+		if (orderItemList == null) {
+			if (other.orderItemList != null)
 				return false;
-		} else if (!orderItemSet.equals(other.orderItemSet))
+		} else if (!orderItemList.equals(other.orderItemList))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", customerId=" + customerId + ", orderItemSet=" + orderItemSet + "]";
+		return "Order [id=" + id + ", customerId=" + customerId + ", orderItemList=" + orderItemList + "]";
 	}
 }

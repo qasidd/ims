@@ -70,9 +70,9 @@ public class OrderControllerTest {
 		Mockito.doReturn(action).when(orderController).getUpdateAction();
 		Mockito.doReturn(itemId).when(orderController).getInput();
 		
-		Set<OrderItem> set = new HashSet<>();
-		set.add(new OrderItem(Long.valueOf(id), Long.valueOf(itemId)));
-		Order order = new Order(Long.valueOf(id), null, set);
+		List<OrderItem> list = new ArrayList<>();
+		list.add(new OrderItem(Long.valueOf(id), Long.valueOf(itemId)));
+		Order order = new Order(Long.valueOf(id), null, list);
 		Mockito.when(orderServices.update(order)).thenReturn(order);
 		assertEquals(order, orderController.update());
 	}
