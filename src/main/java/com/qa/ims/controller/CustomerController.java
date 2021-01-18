@@ -31,7 +31,7 @@ public class CustomerController implements CrudController<Customer>{
 	 * Reads all customers to the logger
 	 */
 	@Override
-	public List<Customer> readAll() {
+	public List<Customer> read() {
 		List<Customer> customers = customerService.readAll();
 		for(Customer customer: customers) {
 			LOGGER.info(customer.toString());

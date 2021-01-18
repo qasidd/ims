@@ -41,7 +41,7 @@ public class CustomerControllerTest {
 		customers.add(new Customer("Rhys", "T"));
 		customers.add(new Customer("Nic", "J"));
 		Mockito.when(customerServices.readAll()).thenReturn(customers);
-		assertEquals(customers, customerController.readAll());
+		assertEquals(customers, customerController.read());
 	}
 
 	@Test

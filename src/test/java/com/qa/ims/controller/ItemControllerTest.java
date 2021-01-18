@@ -43,7 +43,7 @@ public class ItemControllerTest {
 		items.add(new Item("MacBook Air", 999.0));
 		items.add(new Item("Mac mini", 699.0));
 		Mockito.when(itemServices.readAll()).thenReturn(items);
-		assertEquals(items, itemController.readAll());
+		assertEquals(items, itemController.read());
 	}
 
 	@Test

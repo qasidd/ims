@@ -31,7 +31,7 @@ public class OrderItemController implements CrudController<OrderItem>{
 	 * Reads all orderItems to the logger
 	 */
 	@Override
-	public List<OrderItem> readAll() {
+	public List<OrderItem> read() {
 		List<OrderItem> orderItems = orderItemService.readAll();
 		for(OrderItem orderItem: orderItems) {
 			LOGGER.info(orderItem.toString());

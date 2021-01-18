@@ -1,9 +1,11 @@
 package com.qa.ims.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.qa.action.OrderReadAction;
 import com.qa.action.OrderUpdateAction;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.services.CrudServicesExtended;
@@ -29,20 +31,42 @@ public class OrderController implements CrudController<Order> {
 	}
 	
 	// easier for testing
-	OrderUpdateAction getAction() {
+	OrderUpdateAction getUpdateAction() {
 		return OrderUpdateAction.getAction();
+	}
+	
+	OrderReadAction getReadAction() {
+		return OrderReadAction.getAction();
 	}
 	
 	/**
 	 * Reads all orders to the logger
 	 */
 	@Override
-	public List<Order> readAll() {
-		List<Order> orders = orderService.readAll();
-		for(Order order: orders) {
-			LOGGER.info(order.toString());
+	public List<Order> read() {
+		LOGGER.info("Would you like to view all orders or the basket of one order?");
+		OrderReadAction.printActions();
+		
+		List<Order> orderList = new ArrayList<>();
+		Long orderId;
+		switch (getReadAction() ) {
+		case ALL:
+			orderList = orderService.readAll();
+			for(Order order: orderList) {
+				LOGGER.info(order.toString());
+			}
+			break;
+		case ONE:
+			LOGGER.info("Please enter the id of the order you would like to view the basket of");
+			orderId = Long.valueOf(getInput());
+			orderList.add(orderService.readById(orderId));
+			LOGGER.info(orderList.get(0));
+			break;
+		default:
+			break;
 		}
-		return orders;
+
+		return orderList;
 	}
 
 	/**
@@ -69,7 +93,7 @@ public class OrderController implements CrudController<Order> {
 		
 		Order order = null;
 		Long itemId;
-		switch(getAction()) {
+		switch(getUpdateAction()) {
 		case ADD:
 			LOGGER.info("Please enter the id of the item you would like to add to order " + id);
 			itemId = Long.valueOf(getInput());

@@ -47,7 +47,7 @@ public class OrderControllerTest {
 		orders.add(new Order(2L));
 		orders.add(new Order(3L));
 		Mockito.when(orderServices.readAll()).thenReturn(orders);
-		assertEquals(orders, orderController.readAll());
+		assertEquals(orders, orderController.read());
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class OrderControllerTest {
 		String itemId = "2";
 		
 		Mockito.doReturn(id).when(orderController).getInput();
-		Mockito.doReturn(action).when(orderController).getAction();
+		Mockito.doReturn(action).when(orderController).getUpdateAction();
 		Mockito.doReturn(itemId).when(orderController).getInput();
 		
 		Set<OrderItem> set = new HashSet<>();

@@ -10,7 +10,7 @@ import com.qa.ims.utils.Utils;
  *
  */
 public enum OrderReadAction implements Action {
-	READ_ALL("To view all orders"), READ("To view a specific order");
+	ALL("To view all orders"), ONE("To view a specific order");
 	
 	public static final Logger LOGGER = Logger.getLogger(OrderReadAction.class);
 
