@@ -169,6 +169,7 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 	public void delete(long id) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
+			statement.executeUpdate("delete from orders_items where order_id = " + id);
 			statement.executeUpdate("delete from orders where id = " + id);
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
