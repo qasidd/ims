@@ -21,27 +21,33 @@ public class CustomerServicesTest {
 	private CustomerServices customerServices;
 	
 	@Test
-	public void customerServicesCreate() {
+	public void createTest() {
 		Customer customer = new Customer("chris", "perrins");
 		customerServices.create(customer);
 		Mockito.verify(customerDao, Mockito.times(1)).create(customer);
 	}
 	
 	@Test
-	public void customerServicesRead() {
+	public void readAllTest() {
 		customerServices.readAll();
 		Mockito.verify(customerDao, Mockito.times(1)).readAll();
 	}
 	
 	@Test
-	public void customerServicesUpdate() {
+	public void readByIdTest() {
+		customerServices.readById(1L);
+		Mockito.verify(customerDao, Mockito.times(1)).readById(1L);
+	}
+	
+	@Test
+	public void updateTest() {
 		Customer customer = new Customer("chris", "perrins");
 		customerServices.update(customer);
 		Mockito.verify(customerDao, Mockito.times(1)).update(customer);
 	}
 	
 	@Test
-	public void customerServicesDelete() {
+	public void deleteTest() {
 		customerServices.delete(1L);;
 		Mockito.verify(customerDao, Mockito.times(1)).delete(1L);
 	}
