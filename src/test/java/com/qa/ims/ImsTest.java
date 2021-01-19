@@ -1,6 +1,10 @@
 package com.qa.ims;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,13 +51,14 @@ public class ImsTest {
 		Mockito.verify(itemController, Mockito.times(1)).update();
 	}
 	
-//	@Test
-//	public void initTest() {
-//		
-//	}
+	@Test
+	public void readFileTest() {
+		String fileLocation = "src/test/resources/read-test.txt";
+		assertEquals("test text\r\nhello world\r\n", ims.readFile(fileLocation));
+	}
 	
 //	@Test
-//	public void readFileTest() {
+//	public void initTest() {
 //		
 //	}
 }
