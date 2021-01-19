@@ -27,7 +27,6 @@ public class OrderDaoMysqlTest {
 	private static String username = "root";
 	private static String password = "root";
 	
-	@Spy
 	OrderDaoMysql orderDaoMysql = new OrderDaoMysql(jdbcConnectionUrlTest, username, password);
 
 	@BeforeClass
