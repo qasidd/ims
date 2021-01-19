@@ -56,56 +56,56 @@ public class OrderControllerTest {
 	
 	@Test
 	public void readOneTest() {
-		String id = "1";
+		Long id = 1L;
 		Mockito.doReturn(OrderReadAction.ONE).when(orderController).getReadAction();
-		Mockito.doReturn(id).when(orderController).getInput();
+		Mockito.doReturn(id).when(orderController).getLong();
 		
 		List<Order> orders = new ArrayList<>();
-		Order order = new Order(Long.valueOf(id));
+		Order order = new Order(id);
 		orders.add(order);
-		Mockito.when(orderServices.readById(Long.valueOf(id))).thenReturn(order);
+		Mockito.when(orderServices.readById(id)).thenReturn(order);
 		assertEquals(orders, orderController.read());
 	}
 
 	@Test
 	public void createTest() {
-		String customerId = "1";
-		Mockito.doReturn(customerId).when(orderController).getInput();
+		Long customerId = 1L;
+		Mockito.doReturn(customerId).when(orderController).getLong();
 		
-		Order order = new Order(Long.valueOf(customerId));
-		Order savedOrder = new Order(1L, 1L);
+		Order order = new Order(customerId);
+		Order savedOrder = new Order(1L, customerId);
 		Mockito.when(orderServices.create(order)).thenReturn(savedOrder);
 		assertEquals(savedOrder, orderController.create());
 	}
 
 	@Test
 	public void updateAddToTest() {
-		String id = "1";
+		Long id = 1L;
 		OrderUpdateAction action = OrderUpdateAction.ADD;
-		String itemId = "2";
+		Long itemId = 2L;
 		
-		Mockito.doReturn(id, itemId).when(orderController).getInput();
+		Mockito.doReturn(id, itemId).when(orderController).getLong();
 		Mockito.doReturn(action).when(orderController).getUpdateAction();
 		
 		List<OrderItem> list = new ArrayList<>();
-		list.add(new OrderItem(Long.valueOf(id), Long.valueOf(itemId)));
-		Order order = new Order(Long.valueOf(id), 1L, list);
-		Mockito.when(orderServices.addTo(Long.valueOf(id), Long.valueOf(itemId))).thenReturn(order);
+		list.add(new OrderItem(id, itemId));
+		Order order = new Order(id, 1L, list);
+		Mockito.when(orderServices.addTo(id, itemId)).thenReturn(order);
 		assertEquals(order, orderController.update());
 	}
 	
 	@Test
 	public void updateDeleteFromTest() {
-		String id = "1";
+		Long id = 1L;
 		OrderUpdateAction action = OrderUpdateAction.DELETE;
-		String itemId = "2";
+		Long itemId = 2L;
 		
-		Mockito.doReturn(id, itemId).when(orderController).getInput();
+		Mockito.doReturn(id, itemId).when(orderController).getLong();
 		Mockito.doReturn(action).when(orderController).getUpdateAction();
 		
 		List<OrderItem> list = new ArrayList<>();
-		Order order = new Order(Long.valueOf(id), 1L, list);
-		Mockito.when(orderServices.deleteFrom(Long.valueOf(id), Long.valueOf(itemId))).thenReturn(order);
+		Order order = new Order(id, 1L, list);
+		Mockito.when(orderServices.deleteFrom(id, itemId)).thenReturn(order);
 		assertEquals(order, orderController.update());
 	}
 
@@ -116,10 +116,10 @@ public class OrderControllerTest {
 	 */
 	@Test
 	public void deleteTest() {
-		String id = "1";
-		Mockito.doReturn(id).when(orderController).getInput();
+		Long id = 1L;
+		Mockito.doReturn(id).when(orderController).getLong();
 		orderController.delete();
-		Mockito.verify(orderServices, Mockito.times(1)).delete(1L);
+		Mockito.verify(orderServices, Mockito.times(1)).delete(id);
 	}
 	
 //	@Test
@@ -136,7 +136,7 @@ public class OrderControllerTest {
 	
 //	@Test
 //	public void readOneTest() {
-//		String id = "1";
+//		Long id = 1L;
 //		Mockito.doReturn(id).when(orderController).getInput();
 //		
 //		List<Order> orders = new ArrayList<>();
@@ -148,7 +148,7 @@ public class OrderControllerTest {
 	
 //	@Test
 //	public void addToTest() {
-//		String id = "1";
+//		Long id = 1L;
 //		String itemId = "2";
 //		Mockito.doReturn(itemId).when(orderController).getInput();
 //		
@@ -161,7 +161,7 @@ public class OrderControllerTest {
 	
 //	@Test
 //	public void deleteFromTest() {
-//		String id = "1";
+//		Long id = 1L;
 //		String itemId = "2";
 //		Mockito.doReturn(itemId).when(orderController).getInput();
 //		
