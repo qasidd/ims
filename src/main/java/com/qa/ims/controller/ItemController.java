@@ -17,10 +17,17 @@ public class ItemController implements CrudController<Item> {
 	public ItemController(CrudServices<Item> itemService) {
 		this.itemService = itemService;
 	}
-	
 
 	String getInput() {
 		return Utils.getInput();
+	}
+	
+	Long getLong() {
+		return Utils.getLong();
+	}
+	
+	Double getDouble() {
+		return Utils.getDouble();
 	}
 	
 	/**
@@ -43,7 +50,7 @@ public class ItemController implements CrudController<Item> {
 		LOGGER.info("Please enter the title");
 		String title = getInput();
 		LOGGER.info("Please enter a price");
-		Double price = Double.valueOf(getInput());
+		Double price = getDouble();
 		Item item = itemService.create(new Item(title, price));
 		LOGGER.info("Item created");
 		return item;
@@ -55,11 +62,11 @@ public class ItemController implements CrudController<Item> {
 	@Override
 	public Item update() {
 		LOGGER.info("Please enter the id of the item you would like to update");
-		Long id = Long.valueOf(getInput());
+		Long id = getLong();
 		LOGGER.info("Please enter the title");
 		String title = getInput();
 		LOGGER.info("Please enter a price");
-		Double price = Double.valueOf(getInput());
+		Double price = getDouble();
 		Item item = itemService.update(new Item(id, title, price));
 		LOGGER.info("Item Updated");
 		return item;
@@ -71,7 +78,7 @@ public class ItemController implements CrudController<Item> {
 	@Override
 	public void delete() {
 		LOGGER.info("Please enter the id of the item you would like to delete");
-		Long id = Long.valueOf(getInput());
+		Long id = getLong();
 		itemService.delete(id);
 	}
 }

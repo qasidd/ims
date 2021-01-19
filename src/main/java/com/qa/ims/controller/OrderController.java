@@ -30,6 +30,10 @@ public class OrderController implements CrudController<Order> {
 		return Utils.getInput();
 	}
 	
+	public Long getLong() {
+		return Utils.getLong();
+	}
+	
 	// easier for testing
 	OrderUpdateAction getUpdateAction() {
 		return OrderUpdateAction.getAction();
@@ -71,7 +75,7 @@ public class OrderController implements CrudController<Order> {
 	
 	public List<Order> readOne() {
 		LOGGER.info("Please enter the id of the order you would like to view the basket of");
-		Long orderId = Long.valueOf(getInput());
+		Long orderId = getLong();
 		Order order = orderService.readById(orderId);
 		double cost = orderService.calculateCost(order);
 		List<Order> orderList = new ArrayList<>();
@@ -89,7 +93,7 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	public Order create() {
 		LOGGER.info("Please enter a customer ID");
-		Long customerId = Long.valueOf(getInput());
+		Long customerId = getLong();
 		Order order = orderService.create(new Order(customerId));
 		LOGGER.info("Order created");
 		return order;
@@ -101,7 +105,7 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	public Order update() {
 		LOGGER.info("Please enter the id of the order you would like to update");
-		Long id = Long.valueOf(getInput());
+		Long id = getLong();
 		LOGGER.info("Would you like to add or remove an item from order " + id + "?");
 		OrderUpdateAction.printActions();
 		
@@ -122,13 +126,13 @@ public class OrderController implements CrudController<Order> {
 	
 	public Order addTo(long id) {
 		LOGGER.info("Please enter the id of the item you would like to add to order " + id);
-		Long itemId = Long.valueOf(getInput());
+		Long itemId = getLong();
 		return orderService.addTo(id, itemId);
 	}
 	
 	public Order deleteFrom(long id) {
 		LOGGER.info("Please enter the id of the item you would like to delete from order " + id);
-		Long itemId = Long.valueOf(getInput());
+		Long itemId = getLong();
 		return orderService.deleteFrom(id, itemId);
 	}
 
@@ -138,7 +142,7 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	public void delete() {
 		LOGGER.info("Please enter the id of the order you would like to delete");
-		Long id = Long.valueOf(getInput());
+		Long id = getLong();
 		orderService.delete(id);
 		LOGGER.info("Order Deleted");
 	}

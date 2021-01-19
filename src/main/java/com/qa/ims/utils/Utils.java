@@ -27,9 +27,11 @@ public class Utils {
 		while (true) {
 			try {
 				return scanner.nextInt();
-			} catch (InputMismatchException e) {
+			} catch (Exception e) {
+				LOGGER.debug(e.getStackTrace());
 				LOGGER.error(e.getMessage());
 				LOGGER.info("Please enter only a number!");
+				scanner.nextLine();
 			}
 		}
 	}
@@ -40,9 +42,11 @@ public class Utils {
 		while (true) {
 			try {
 				return scanner.nextDouble();
-			} catch (InputMismatchException e) {
+			} catch (Exception e) {
+				LOGGER.debug(e.getStackTrace());
 				LOGGER.error(e.getMessage());
 				LOGGER.info("Please enter only a decimal!");
+				scanner.nextLine();
 			}
 		}
 	}
@@ -53,9 +57,11 @@ public class Utils {
 		while (true) {
 			try {
 				return scanner.nextLong();
-			} catch (InputMismatchException e) {
+			} catch (Exception e) {
+				LOGGER.debug(e.getStackTrace());
 				LOGGER.error(e.getMessage());
 				LOGGER.info("Please enter only a number!");
+				scanner.nextLine();
 			}
 		}
 	}
