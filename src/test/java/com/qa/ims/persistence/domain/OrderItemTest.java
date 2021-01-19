@@ -139,7 +139,7 @@ public class OrderItemTest {
 	
 	@Test
 	public void toStringTest() {
-		String toString = "OrderItem [id=1, orderId=1, itemId=2, quantity=3]";
+		String toString = "OrderItem [id=1, orderId=1, itemId=2]";
 		assertEquals(toString, orderItem.toString());
 	}
 }

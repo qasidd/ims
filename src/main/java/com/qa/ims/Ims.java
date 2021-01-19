@@ -28,23 +28,35 @@ public class Ims {
 
 	public static final Logger LOGGER = Logger.getLogger(Ims.class);
 
+	String getInput() {
+		return Utils.getInput();
+	}
+	
+	Domain getDomain() {
+		return Domain.getDomain();
+	}
+	
+	EntityAction getAction() {
+		return EntityAction.getAction();
+	}
+	
 	public void imsSystem() {
 		LOGGER.info("What is your username");
-		String username = Utils.getInput();
+		String username = getInput();
 		LOGGER.info("What is your password");
-		String password = Utils.getInput();
+		String password = getInput();
 
 		if (init(username, password)) {
 			while (entityMenu(username, password));
 		}
 	}
 	
-	private boolean entityMenu(String username, String password) {
+	public boolean entityMenu(String username, String password) {
 		System.out.print("\n");
 		LOGGER.info("Which entity would you like to use?");
 		Domain.printDomains();
 
-		Domain domain = Domain.getDomain();
+		Domain domain = getDomain();
 		if (domain == Domain.STOP) { 
 			LOGGER.info("Bye!");
 			return false;
@@ -52,7 +64,7 @@ public class Ims {
 		LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
 
 		EntityAction.printActions();
-		EntityAction action = EntityAction.getAction();
+		EntityAction action = getAction();
 
 		switch (domain) {
 		case CUSTOMER:
@@ -77,7 +89,7 @@ public class Ims {
 		return true;
 	}
 
-	private void doAction(CrudController<?> crudController, EntityAction action) {
+	public void doAction(CrudController<?> crudController, EntityAction action) {
 		switch (action) {
 		case CREATE:
 			crudController.create();

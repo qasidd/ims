@@ -20,7 +20,7 @@ import com.qa.ims.services.CustomerServices;
 public class CustomerControllerTest {
 	
 	/**
-	 *  The thing I want to fake functionlity for
+	 *  The thing I want to fake functionality for
 	 */
 	@Mock
 	private CustomerServices customerServices;
@@ -35,7 +35,6 @@ public class CustomerControllerTest {
 
 	@Test
 	public void readAllTest() {
-		CustomerController customerController = new CustomerController(customerServices);
 		List<Customer> customers = new ArrayList<>();
 		customers.add(new Customer("Chris", "P"));
 		customers.add(new Customer("Rhys", "T"));

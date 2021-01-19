@@ -117,7 +117,7 @@ public class OrderTest {
 	
 	@Test
 	public void toStringTest() {
-		String toString = "Order [id=1, customerId=1]";
+		String toString = "Order [id=1, customerId=1, orderItemList=[]]";
 		assertEquals(toString, order.toString());
 	}
 

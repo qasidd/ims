@@ -26,7 +26,7 @@ public class OrderController implements CrudController<Order> {
 	}
 	
 
-	String getInput() {
+	public String getInput() {
 		return Utils.getInput();
 	}
 	
@@ -48,27 +48,38 @@ public class OrderController implements CrudController<Order> {
 		OrderReadAction.printActions();
 		
 		List<Order> orderList = new ArrayList<>();
-		Long orderId;
 		switch (getReadAction()) {
 		case ALL:
-			orderList = orderService.readAll();
-			for(Order order: orderList) {
-				LOGGER.info(order.toString());
-			}
+			orderList = readAll();
 			break;
 		case ONE:
-			LOGGER.info("Please enter the id of the order you would like to view the basket of");
-			orderId = Long.valueOf(getInput());
-			Order order = orderService.readById(orderId);
-			double cost = orderService.calculateCost(order);
-			orderList.add(order);
-			LOGGER.info(orderList.get(0));
-			LOGGER.info(String.format("Total: £%.2f", cost));
-			break;
-		default:
+			orderList = readOne();
 			break;
 		}
 
+		return orderList;
+	}
+	
+	public List<Order> readAll() {
+		List<Order> orderList = orderService.readAll();
+		for(Order order: orderList) {
+			LOGGER.info(order.toString());
+		}
+		
+		return orderList;
+	}
+	
+	public List<Order> readOne() {
+		LOGGER.info("Please enter the id of the order you would like to view the basket of");
+		Long orderId = Long.valueOf(getInput());
+		Order order = orderService.readById(orderId);
+		double cost = orderService.calculateCost(order);
+		List<Order> orderList = new ArrayList<>();
+		orderList.add(order);
+		
+		LOGGER.info(orderList.get(0));
+		LOGGER.info(String.format("Total: £%.2f", cost));
+		
 		return orderList;
 	}
 
@@ -95,22 +106,30 @@ public class OrderController implements CrudController<Order> {
 		OrderUpdateAction.printActions();
 		
 		Order order = null;
-		Long itemId;
 		switch(getUpdateAction()) {
 		case ADD:
-			LOGGER.info("Please enter the id of the item you would like to add to order " + id);
-			itemId = Long.valueOf(getInput());
-			order = orderService.addTo(id, itemId);
+			order = addTo(id);
 			break;
 		case DELETE:
-			LOGGER.info("Please enter the id of the item you would like to delete from order " + id + ":");
-			itemId = Long.valueOf(getInput());
-			order = orderService.deleteFrom(id, itemId);
+			order = deleteFrom(id);
 			break;
 		}
 		
 		LOGGER.info("Order Updated");
+		LOGGER.info(order);
 		return order;
+	}
+	
+	public Order addTo(long id) {
+		LOGGER.info("Please enter the id of the item you would like to add to order " + id);
+		Long itemId = Long.valueOf(getInput());
+		return orderService.addTo(id, itemId);
+	}
+	
+	public Order deleteFrom(long id) {
+		LOGGER.info("Please enter the id of the item you would like to delete from order " + id);
+		Long itemId = Long.valueOf(getInput());
+		return orderService.deleteFrom(id, itemId);
 	}
 
 	/**

@@ -21,27 +21,33 @@ public class ItemServicesTest {
 	private ItemServices itemServices;
 	
 	@Test
-	public void itemServicesCreate() {
+	public void createTest() {
 		Item item = new Item("iPhone 12", 899.0);
 		itemServices.create(item);
 		Mockito.verify(itemDao, Mockito.times(1)).create(item);
 	}
 	
 	@Test
-	public void itemServicesRead() {
+	public void readAllTest() {
 		itemServices.readAll();
 		Mockito.verify(itemDao, Mockito.times(1)).readAll();
 	}
 	
 	@Test
-	public void itemServicesUpdate() {
+	public void readByIdTest() {
+		itemServices.readById(1L);
+		Mockito.verify(itemDao, Mockito.times(1)).readById(1L);
+	}
+	
+	@Test
+	public void updateTest() {
 		Item item = new Item("iPhone 12", 899.0);
 		itemServices.update(item);
 		Mockito.verify(itemDao, Mockito.times(1)).update(item);
 	}
 	
 	@Test
-	public void itemServicesDelete() {
+	public void deleteTest() {
 		itemServices.delete(1L);;
 		Mockito.verify(itemDao, Mockito.times(1)).delete(1L);
 	}
