@@ -1,11 +1,8 @@
 package com.qa.ims.utils;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
-
-import com.qa.ims.persistence.dao.OrderDaoMysql;
 
 public class Utils {
 	
