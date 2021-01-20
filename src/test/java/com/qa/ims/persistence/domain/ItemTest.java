@@ -2,6 +2,7 @@ package com.qa.ims.persistence.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -37,12 +38,12 @@ public class ItemTest {
 	
 	@Test
 	public void equalsWithNull() {
-		assertFalse(item.equals(null));
+		assertNotEquals(item, null);
 	}
 	
 	@Test
 	public void equalsWithDifferentObject() {
-		assertFalse(item.equals(new Object()));
+		assertNotEquals(item, (new Object()));
 	}
 	
 	@Test
@@ -54,69 +55,69 @@ public class ItemTest {
 	
 	@Test
 	public void checkEquality() {
-		assertTrue(item.equals(item));
+		assertEquals(item, (item));
 	}
 	
 	@Test
 	public void checkEqualityBetweenDifferentObjects() {
-		assertTrue(item.equals(other));
+		assertEquals(item, other);
 	}
 	
 	@Test
 	public void itemTitleNullButOtherTileNotNull() {
 		item.setTitle(null);
-		assertFalse(item.equals(other));
+		assertNotEquals(item, other);
 	}
 	
 	@Test
 	public void itemTitlesNotEqual() {
 		other.setTitle("rhys");
-		assertFalse(item.equals(other));
+		assertNotEquals(item, other);
 	}
 	
 	@Test
 	public void checkEqualityBetweenDifferentObjectsNullTitle() {
 		item.setTitle(null);
 		other.setTitle(null);
-		assertTrue(item.equals(other));
+		assertEquals(item, other);
 	}
 	
 	@Test
 	public void nullId() {
 		item.setId(null);
-		assertFalse(item.equals(other));
+		assertNotEquals(item, other);
 	}
 	
 	@Test
 	public void nullIdOnBoth() {
 		item.setId(null);
 		other.setId(null);
-		assertTrue(item.equals(other));
+		assertEquals(item, other);
 	}
 	
 	@Test
 	public void otherIdDifferent() {
 		other.setId(2L);
-		assertFalse(item.equals(other));
+		assertNotEquals(item, other);
 	}
 	
 	@Test
 	public void nullPrice() {
 		item.setPrice(null);
-		assertFalse(item.equals(other));
+		assertNotEquals(item, other);
 	}
 	
 	@Test
 	public void nullPriceOnBoth() {
 		item.setPrice(null);
 		other.setPrice(null);
-		assertTrue(item.equals(other));
+		assertEquals(item, other);
 	}
 	
 	@Test
 	public void otherPriceDifferent() {
 		other.setPrice(1099.0);
-		assertFalse(item.equals(other));
+		assertNotEquals(item, other);
 	}
 	
 	@Test

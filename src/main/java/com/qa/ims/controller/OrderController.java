@@ -18,7 +18,6 @@ import com.qa.ims.utils.Utils;
 public class OrderController implements CrudController<Order> {
 
 	public static final Logger LOGGER = Logger.getLogger(OrderController.class);
-	private static final char POUND_SYMBOL = '\u00A3';
 	
 	private CrudServicesExtended<Order> orderService;
 	
