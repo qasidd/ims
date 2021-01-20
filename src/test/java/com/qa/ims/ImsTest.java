@@ -56,9 +56,5 @@ public class ImsTest {
 		String fileLocation = "read-test.txt";
 		assertEquals("test text\r\nhello world", ims.readFile(fileLocation));
 	}
-	
-//	@Test
-//	public void initTest() {
-//		
-//	}
+
 }
