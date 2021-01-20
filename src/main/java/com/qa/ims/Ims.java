@@ -1,13 +1,19 @@
 package com.qa.ims;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import com.qa.action.EntityAction;
@@ -118,24 +124,27 @@ public class Ims {
 	 * @param password
 	 */
 	public boolean init(String username, String password) {
-		return init("jdbc:mysql://localhost:3306/", username, password, "src/main/resources/sql-schema.sql");
+		return init("jdbc:mysql://localhost:3306/", username, password, "sql-schema.sql");
+//		return init("elegant-tide-298315:europe-west2:ims//localhost:3306/", username, password, "src/main/resources/sql-schema.sql");
 	}
 
 	public String readFile(String fileLocation) {
-		StringBuilder stringBuilder = new StringBuilder();
-		try (BufferedReader br = new BufferedReader(new FileReader(fileLocation));) {
-			String string;
-			while ((string = br.readLine()) != null) {
-				stringBuilder.append(string);
-				stringBuilder.append("\r\n");
+		InputStream stream = getClass().getClassLoader().getResourceAsStream(fileLocation);
+		String string = "";
+		
+		try {
+			if (stream == null) {
+				throw new Exception("Cannot find file " + fileLocation);
 			}
-		} catch (IOException e) {
+			return IOUtils.toString(stream, Charset.forName("UTF-8"));
+		} catch (Exception e) {
 			for (StackTraceElement ele : e.getStackTrace()) {
 				LOGGER.debug(ele);
 			}
 			LOGGER.error(e.getMessage());
 		}
-		return stringBuilder.toString();
+		
+		return string;
 	}
 
 	/**
@@ -143,7 +152,7 @@ public class Ims {
 	 */
 	public boolean init(String jdbcConnectionUrl, String username, String password, String fileLocation) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
-				BufferedReader br = new BufferedReader(new FileReader(fileLocation));) {
+				BufferedReader br = new BufferedReader(new StringReader(readFile(fileLocation)));) {
 			String string;
 			while ((string = br.readLine()) != null) {
 				try (Statement statement = connection.createStatement();) {
