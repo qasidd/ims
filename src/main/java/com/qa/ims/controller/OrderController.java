@@ -18,6 +18,7 @@ import com.qa.ims.utils.Utils;
 public class OrderController implements CrudController<Order> {
 
 	public static final Logger LOGGER = Logger.getLogger(OrderController.class);
+	private static final char POUND_SYMBOL = '\u00A3';
 	
 	private CrudServicesExtended<Order> orderService;
 	
@@ -82,7 +83,8 @@ public class OrderController implements CrudController<Order> {
 		orderList.add(order);
 		
 		LOGGER.info(orderList.get(0));
-		LOGGER.info(String.format("Total: £%.2f", cost));
+		String total = String.format("%.2f", cost);
+		LOGGER.info("Total: £" + total);
 		
 		return orderList;
 	}
