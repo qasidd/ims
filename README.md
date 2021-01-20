@@ -1,4 +1,5 @@
 Coverage: 85.2% on src/main/java
+![alt text](readme-img/1.png)
 
 # Inventory Management System (IMS)
 
