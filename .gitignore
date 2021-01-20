@@ -4,4 +4,5 @@ target/
 .project
 log-file.log
 bin/
+ims-uml.ucls
 
