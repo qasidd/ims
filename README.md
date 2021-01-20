@@ -1,4 +1,4 @@
-Edit: 14/01/21
+Coverage: 85.2% on src/main/java
 
 # Inventory Management System (IMS)
 
@@ -71,22 +71,18 @@ Add additional notes about how to deploy this on a live system
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning.
-
 ## Authors
 
 * **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
+* **Siddhartha Gurung** - *The rest*
 
 ## License
 
 This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details 
 
-*For help in [Choosing a license](https://choosealicense.com/)*
-
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Team Trap
+* Vinesh
+* Aswene
+* Nick
