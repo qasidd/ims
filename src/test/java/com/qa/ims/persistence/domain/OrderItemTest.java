@@ -2,6 +2,7 @@ package com.qa.ims.persistence.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -36,12 +37,12 @@ public class OrderItemTest {
 	
 	@Test
 	public void equalsWithNull() {
-		assertFalse(orderItem.equals(null));
+		assertNotEquals(orderItem, (null));
 	}
 	
 	@Test
 	public void equalsWithDifferentObject() {
-		assertFalse(orderItem.equals(new Object()));
+		assertNotEquals(orderItem, (new Object()));
 	}
 	
 	@Test
@@ -53,69 +54,69 @@ public class OrderItemTest {
 	
 	@Test
 	public void checkEquality() {
-		assertTrue(orderItem.equals(orderItem));
+		assertEquals(orderItem, (orderItem));
 	}
 	
 	@Test
 	public void checkEqualityBetweenDifferentObjects() {
-		assertTrue(orderItem.equals(other));
+		assertEquals(orderItem, other);
 	}
 	
 	@Test
 	public void orderItemOrderIdNullButOtherOrderIdNotNull() {
 		orderItem.setOrderId(null);
-		assertFalse(orderItem.equals(other));
+		assertNotEquals(orderItem, other);
 	}
 	
 	@Test
 	public void orderItemOrderIdNotEqual() {
 		other.setOrderId(5L);
-		assertFalse(orderItem.equals(other));
+		assertNotEquals(orderItem, other);
 	}
 	
 	@Test
 	public void checkEqualityBetweenDifferentObjectsNullOrderId() {
 		orderItem.setOrderId(null);
 		other.setOrderId(null);
-		assertTrue(orderItem.equals(other));
+		assertEquals(orderItem, other);
 	}
 	
 	@Test
 	public void nullId() {
 		orderItem.setId(null);
-		assertFalse(orderItem.equals(other));
+		assertNotEquals(orderItem, other);
 	}
 	
 	@Test
 	public void nullIdOnBoth() {
 		orderItem.setId(null);
 		other.setId(null);
-		assertTrue(orderItem.equals(other));
+		assertEquals(orderItem, other);
 	}
 	
 	@Test
 	public void otherIdDifferent() {
 		other.setId(2L);
-		assertFalse(orderItem.equals(other));
+		assertNotEquals(orderItem, other);
 	}
 	
 	@Test
 	public void nullItemId() {
 		orderItem.setItemId(null);
-		assertFalse(orderItem.equals(other));
+		assertNotEquals(orderItem, other);
 	}
 	
 	@Test
 	public void nullItemIdOnBoth() {
 		orderItem.setItemId(null);
 		other.setItemId(null);
-		assertTrue(orderItem.equals(other));
+		assertEquals(orderItem, other);
 	}
 	
 	@Test
 	public void otherItemIdDifferent() {
 		other.setItemId(5L);
-		assertFalse(orderItem.equals(other));
+		assertNotEquals(orderItem, other);
 	}
 	
 	@Test

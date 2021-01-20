@@ -182,14 +182,6 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 		}
 		return null;
 	}
-	
-//	public boolean checkIfItemAlreadyExistsInOrder(Order order, long itemId) {
-//		for (OrderItem orderItem : order.getOrderItemSet()) {
-//			if (orderItem.getItemId() == itemId) return true;
-//		}
-//		
-//		return false;
-//	}
 
 	/**
 	 * Deletes a order in the database
@@ -217,8 +209,7 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 								+ "FROM items JOIN orders_items "
 								+ "WHERE items.id = orders_items.item_id AND order_id = " + order.getId());) {
 			resultSet.next();
-			int totalCost = resultSet.getInt("total_cost");
-			return totalCost;
+			return resultSet.getInt("total_cost");
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());
 			LOGGER.error(e.getMessage());

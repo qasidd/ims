@@ -2,7 +2,6 @@ package com.qa.ims.services;
 
 import java.util.List;
 
-import com.qa.ims.persistence.dao.Dao;
 import com.qa.ims.persistence.dao.DaoExtended;
 import com.qa.ims.persistence.domain.Order;
 
