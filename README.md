@@ -55,6 +55,16 @@ To create a copy of this repository in to your local machine:
 
 5. The project is now ready for development and testing!
 
+## Running the tests
+
+All testing of this program was done using unit tests. Unit testing is a software testing method that isolates individual units of the software, and validates whether each of them performs as designed. These units are considered to be the smallest testable parts of an application. JUnit and Mockito were used to write the tests.
+
+To deploy tests using Maven, simply run `mvn clean test` in the root directory of your local repository.
+
+## Deployment
+
+Make sure the value of `IP_ADDRESS` is accurate before packaging and distributing!
+
 To create a self-contained executable JAR (using Maven):
 
 1. Open the directory containing the repository in a terminal
@@ -65,16 +75,6 @@ To create a self-contained executable JAR (using Maven):
 3. If all tests pass and no hiccups occur, the JAR file will be located in the target folder; the file that ends with `-with-dependencies` would not require a user to have the necessary dependencies in their system to run the executable
 
 ![alt text](readme-img/7.png)
-
-## Running the tests
-
-All testing of this program was done using unit tests. Unit testing is a software testing method that isolates individual units of the software, and validates whether each of them performs as designed. These units are considered to be the smallest testable parts of an application. JUnit and Mockito were used to write the tests.
-
-To deploy tests using Maven, simply run `mvn clean test` in the root directory of your local repository.
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
