@@ -46,7 +46,7 @@ To create a copy of this repository in to your local machine:
 ![](readme-img/4.png)
 
 3. Open the repo using your chosen IDE
-4. Currently the program will try to connect to a now defunct remote MySQL instance; replace the value of `IP_ADDRESS` in the `Ims` class to a working one
+4. Currently the program will try to connect, and either create or read a database named `ims`, to a now defunct remote MySQL instance; replace the value of `IP_ADDRESS` in the `Ims` class to a working one
 
 ![](readme-img/5.png)
 
