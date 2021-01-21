@@ -31,7 +31,7 @@ public class Ims {
 
 	public static final Logger LOGGER = Logger.getLogger(Ims.class);
 	
-	public static final String IP_ADDRESS = "35.189.108.210";
+	public static final String IP_ADDRESS = "";
 
 	String getInput() {
 		return Utils.getInput();
