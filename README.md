@@ -39,19 +39,16 @@ These instructions will get you a copy of the project up and running on your loc
 To create a copy of this repository in to your local machine:
 
 1. Fork this repository to your account
-
-![alt](readme-img/2.png)
+![](readme-img/2.png)
 
 2. Using Git Bash, clone it to your local machine to a directory of your choosing
-
-![alt text](readme-img/3.png)
-
-![alt text](readme-img/4.png)
+![](readme-img/3.png)
+![](readme-img/4.png)
 
 3. Open the repo using your chosen IDE
 4. Currently the program will try to connect to a now defunct remote MySQL instance; replace the value of `IP_ADDRESS` in the `Ims` class to a working one
 
-![alt text](readme-img/5.png)
+![](readme-img/5.png)
 
 5. The project is now ready for development and testing!
 
@@ -70,11 +67,11 @@ To create a self-contained executable JAR using Maven:
 1. Open the directory containing the repository in a terminal
 2. Run `mvn clean` package
 
-![alt text](readme-img/6.png)
+![](readme-img/6.png)
 
 3. If all tests pass and no hiccups occur, the JAR file will be located in the target folder; the file that ends with `-with-dependencies` would not require a user to have the necessary dependencies in their system to run the executable
 
-![alt text](readme-img/7.png)
+![](readme-img/7.png)
 
 ## Built With
 
