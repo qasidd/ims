@@ -21,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 [Git](https://git-scm.com/downloads)
 
-#### Dependencies (already added to the provided pom.xml):
+#### Dependencies (already added to the pom.xml):
 
 [MySQL Connector](https://mvnrepository.com/artifact/mysql/mysql-connector-java)
 
