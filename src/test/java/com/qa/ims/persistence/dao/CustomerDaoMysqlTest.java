@@ -19,7 +19,7 @@ public class CustomerDaoMysqlTest {
 	
 	public static final Logger LOGGER = Logger.getLogger(CustomerDaoMysql.class);
 	
-	private static String jdbcConnectionUrl = "jdbc:mysql://localhost:3306/";
+	private static String jdbcConnectionUrl = "jdbc:mysql://35.189.108.210:3306/";
 	private static String jdbcConnectionUrlTest = jdbcConnectionUrl + "ims_test";
 	private static String username = "root";
 	private static String password = "root";
@@ -58,7 +58,10 @@ public class CustomerDaoMysqlTest {
 	
 	@Test
 	public void readTest() {
-		List<Customer> customerList = List.of(new Customer(1L, "Jim", "Bob"), new Customer(2L, "Jane", "Doe"), new Customer(3L, "John", "Cena"));
+		List<Customer> customerList = List.of(
+				new Customer(1L, "Jim", "Bob"), 
+				new Customer(2L, "Jane", "Doe"), 
+				new Customer(3L, "John", "Cena"));
 		for (Customer c : customerList) {
 			customerDaoMysql.create(c);
 		}
