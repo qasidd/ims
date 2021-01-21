@@ -121,12 +121,11 @@ public class Ims {
 	 * @param password
 	 */
 	public boolean init(String username, String password) {
-		return init("jdbc:mysql://localhost:3306/", username, password, "sql-schema.sql");
+		return init("jdbc:mysql://35.189.108.210:3306/", username, password, "sql-schema.sql");
 	}
 
 	public String readFile(String fileLocation) {
 		InputStream stream = getClass().getClassLoader().getResourceAsStream(fileLocation);
-		String string = "";
 		
 		try {
 			if (stream == null) {
@@ -140,7 +139,7 @@ public class Ims {
 			LOGGER.error(e.getMessage());
 		}
 		
-		return string;
+		return "";
 	}
 
 	/**

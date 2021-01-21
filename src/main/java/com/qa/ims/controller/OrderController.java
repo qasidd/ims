@@ -121,7 +121,6 @@ public class OrderController implements CrudController<Order> {
 		}
 		
 		LOGGER.info("Order Updated");
-		LOGGER.info(order);
 		return order;
 	}
 	
