@@ -29,7 +29,7 @@ public class ItemDaoMysqlTest {
 	@BeforeClass
 	public static void init() {
 		Ims ims = new Ims();
-		ims.init(jdbcConnectionUrl, username, password, "src/test/resources/sql-schema.sql");
+		ims.init(jdbcConnectionUrl, username, password, "sql-schema.sql");
 	}
 	
 	@Before
