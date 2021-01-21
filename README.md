@@ -39,9 +39,11 @@ These instructions will get you a copy of the project up and running on your loc
 To create a copy of this repository in to your local machine:
 
 1. Fork this repository to your account
+
 ![](readme-img/2.png)
 
 2. Using Git Bash, clone it to your local machine to a directory of your choosing
+
 ![](readme-img/3.png)
 ![](readme-img/4.png)
 
