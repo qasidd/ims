@@ -65,7 +65,7 @@ To deploy tests using Maven, simply run `mvn clean test` in the root directory o
 
 Make sure the value of `IP_ADDRESS` is accurate before packaging and distributing!
 
-To create a self-contained executable JAR (using Maven):
+To create a self-contained executable JAR using Maven:
 
 1. Open the directory containing the repository in a terminal
 2. Run `mvn clean` package
