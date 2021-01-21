@@ -19,7 +19,7 @@ public class CustomerDaoMysqlTest {
 	
 	public static final Logger LOGGER = Logger.getLogger(CustomerDaoMysql.class);
 	
-	private static String jdbcConnectionUrl = "jdbc:mysql://35.189.108.210:3306/";
+	private static String jdbcConnectionUrl = "jdbc:mysql://" + Ims.IP_ADDRESS + ":3306/";
 	private static String jdbcConnectionUrlTest = jdbcConnectionUrl + "ims_test";
 	private static String username = "root";
 	private static String password = "root";

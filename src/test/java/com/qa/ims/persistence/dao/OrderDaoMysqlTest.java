@@ -11,8 +11,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 
 import com.qa.ims.Ims;
 import com.qa.ims.persistence.domain.Order;
@@ -22,7 +20,7 @@ public class OrderDaoMysqlTest {
 	
 	public static final Logger LOGGER = Logger.getLogger(OrderDaoMysql.class);
 	
-	private static String jdbcConnectionUrl = "jdbc:mysql://35.189.108.210:3306/";
+	private static String jdbcConnectionUrl = "jdbc:mysql://" + Ims.IP_ADDRESS + ":3306/";
 	private static String jdbcConnectionUrlTest = jdbcConnectionUrl + "ims_test";
 	private static String username = "root";
 	private static String password = "root";
@@ -32,7 +30,6 @@ public class OrderDaoMysqlTest {
 	@BeforeClass
 	public static void init() {
 		Ims ims = new Ims();
-//		ims.init(jdbcConnectionUrl, username, password, "src/test/resources/sql-schema.sql");
 		ims.init(jdbcConnectionUrl, username, password, "sql-schema.sql");
 		
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrlTest, username, password);

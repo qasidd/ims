@@ -30,6 +30,8 @@ import com.qa.ims.utils.Utils;
 public class Ims {
 
 	public static final Logger LOGGER = Logger.getLogger(Ims.class);
+	
+	public static final String IP_ADDRESS = "35.189.108.210";
 
 	String getInput() {
 		return Utils.getInput();
@@ -121,7 +123,7 @@ public class Ims {
 	 * @param password
 	 */
 	public boolean init(String username, String password) {
-		return init("jdbc:mysql://35.189.108.210:3306/", username, password, "sql-schema.sql");
+		return init("jdbc:mysql://" + IP_ADDRESS + ":3306/", username, password, "sql-schema.sql");
 	}
 
 	public String readFile(String fileLocation) {

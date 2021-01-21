@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.qa.ims.Ims;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderItem;
 
@@ -22,7 +23,7 @@ public class OrderDaoMysql implements DaoExtended<Order> {
 	private String password;
 
 	public OrderDaoMysql(String username, String password) {
-		this.jdbcConnectionUrl = "jdbc:mysql://35.189.108.210:3306/ims";
+		this.jdbcConnectionUrl = "jdbc:mysql://" + Ims.IP_ADDRESS + ":3306/ims";
 		this.username = username;
 		this.password = password;
 	}
