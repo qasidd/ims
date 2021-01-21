@@ -22,7 +22,7 @@ public class OrderDaoMysqlTest {
 	
 	public static final Logger LOGGER = Logger.getLogger(OrderDaoMysql.class);
 	
-	private static String jdbcConnectionUrl = "jdbc:mysql://localhost:3306/";
+	private static String jdbcConnectionUrl = "jdbc:mysql://35.189.108.210:3306/";
 	private static String jdbcConnectionUrlTest = jdbcConnectionUrl + "ims_test";
 	private static String username = "root";
 	private static String password = "root";
