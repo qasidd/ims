@@ -27,11 +27,15 @@ public class CustomerController implements CrudController<Customer>{
 		return Utils.getInput();
 	}
 	
+	Long getLong() {
+		return Utils.getLong();
+	}
+	
 	/**
 	 * Reads all customers to the logger
 	 */
 	@Override
-	public List<Customer> readAll() {
+	public List<Customer> read() {
 		List<Customer> customers = customerService.readAll();
 		for(Customer customer: customers) {
 			LOGGER.info(customer.toString());
@@ -59,7 +63,7 @@ public class CustomerController implements CrudController<Customer>{
 	@Override
 	public Customer update() {
 		LOGGER.info("Please enter the id of the customer you would like to update");
-		Long id = Long.valueOf(getInput());
+		Long id = getLong();
 		LOGGER.info("Please enter a first name");
 		String firstName = getInput();
 		LOGGER.info("Please enter a surname");
@@ -75,7 +79,7 @@ public class CustomerController implements CrudController<Customer>{
 	@Override
 	public void delete() {
 		LOGGER.info("Please enter the id of the customer you would like to delete");
-		Long id = Long.valueOf(getInput());
+		Long id = getLong();
 		customerService.delete(id);
 	}
 	
