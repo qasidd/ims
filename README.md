@@ -3,7 +3,7 @@ Coverage: 85.3% on src/main/java
 
 # Inventory Management System (IMS)
 
-A CRUD application that allows interaction via a command-line interface. Currently will try to connect to a local MySQL instance using JDBC, and create/use a database called 'ims'.
+A CRUD application that allows interaction via a command-line interface. Currently will try to connect to a now defunct remote MySQL instance using JDBC, and create/use a database called 'ims'.
 
 The database comprises of three tables called Customers, Items and Orders, as well as an intermediary table named Orders_Items, created to handle the many-to-many relationship between Items and Orders.
 
