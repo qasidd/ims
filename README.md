@@ -71,7 +71,7 @@ To create a self-contained executable JAR using Maven:
 
 ![](readme-img/6.png)
 
-3. If all tests pass and no hiccups occur, the JAR file will be located in the target folder; the file that ends with `-with-dependencies` would not require a user to have the necessary dependencies in their system to run the executable
+3. If all tests pass and no hiccups occur, the JAR file will be located in the target folder. The file that ends with `-with-dependencies` will not require a user to have the necessary dependencies in their system to run the executable
 
 ![](readme-img/7.png)
 
