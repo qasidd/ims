@@ -67,7 +67,7 @@ Make sure the value of `IP_ADDRESS` is accurate before packaging and distributin
 To create a self-contained executable JAR using Maven:
 
 1. Open the directory containing the repository in a terminal
-2. Run `mvn clean` package
+2. Run `mvn clean package`
 
 ![](readme-img/6.png)
 
