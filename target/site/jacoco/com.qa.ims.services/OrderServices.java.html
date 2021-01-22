@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderServices.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">qasidd-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.ims.services</a> &gt; <span class="el_source">OrderServices.java</span></div><h1>OrderServices.java</h1><pre class="source lang-java linenums">package com.qa.ims.services;
+
+import java.util.List;
+
+import com.qa.ims.persistence.dao.DaoExtended;
+import com.qa.ims.persistence.domain.Order;
+
+public class OrderServices implements CrudServicesExtended&lt;Order&gt; {
+
+	private DaoExtended&lt;Order&gt; orderDao;
+	
+<span class="fc" id="L12">	public OrderServices(DaoExtended&lt;Order&gt; orderDao) {</span>
+<span class="fc" id="L13">		this.orderDao = orderDao;</span>
+<span class="fc" id="L14">	}</span>
+	
+	public List&lt;Order&gt; readAll() {
+<span class="fc" id="L17">		return orderDao.readAll();</span>
+	}
+	
+	public Order readById(Long id) {
+<span class="fc" id="L21">		return orderDao.readById(id);</span>
+	}
+
+	public Order create(Order order) {
+<span class="fc" id="L25">		return orderDao.create(order);</span>
+	}
+
+	public Order update(Order order) {
+<span class="fc" id="L29">		return orderDao.update(order);</span>
+	}
+
+	public Order addTo(Long orderId, Long itemId) {
+<span class="fc" id="L33">		return orderDao.addTo(orderId, itemId);</span>
+	}
+
+	public Order deleteFrom(Long orderId, Long itemId) {
+<span class="fc" id="L37">		return orderDao.deleteFrom(orderId, itemId);</span>
+	}
+
+	public void delete(Long id) {
+<span class="fc" id="L41">		orderDao.delete(id);</span>
+<span class="fc" id="L42">	}</span>
+	
+	public double calculateCost(Order order) {
+<span class="fc" id="L45">		return orderDao.calculateCost(order);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

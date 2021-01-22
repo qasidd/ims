@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">qasidd-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.ims.utils</a> &gt; <span class="el_source">Utils.java</span></div><h1>Utils.java</h1><pre class="source lang-java linenums">package com.qa.ims.utils;
+
+import java.util.Scanner;
+
+import org.apache.log4j.Logger;
+
+public class Utils {
+	
+<span class="nc" id="L9">	public static final Logger LOGGER = Logger.getLogger(Utils.class);</span>
+	
+	private Utils () {
+		
+	}
+
+	public static String getInput() {
+		@SuppressWarnings(&quot;resource&quot;)
+<span class="nc" id="L17">		Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L18">		return scanner.nextLine();</span>
+	}
+	
+	public static int getInt() {
+		@SuppressWarnings(&quot;resource&quot;)
+<span class="nc" id="L23">		Scanner scanner = new Scanner(System.in);</span>
+		while (true) {
+			try {
+<span class="nc" id="L26">				return scanner.nextInt();</span>
+<span class="nc" id="L27">			} catch (Exception e) {</span>
+<span class="nc" id="L28">				LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L29">				LOGGER.error(e.getMessage());</span>
+<span class="nc" id="L30">				LOGGER.info(&quot;Please enter only a number!&quot;);</span>
+<span class="nc" id="L31">				scanner.nextLine();</span>
+<span class="nc" id="L32">			}</span>
+		}
+	}
+	
+	public static double getDouble() {
+		@SuppressWarnings(&quot;resource&quot;)
+<span class="nc" id="L38">		Scanner scanner = new Scanner(System.in);</span>
+		while (true) {
+			try {
+<span class="nc" id="L41">				return scanner.nextDouble();</span>
+<span class="nc" id="L42">			} catch (Exception e) {</span>
+<span class="nc" id="L43">				LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L44">				LOGGER.error(e.getMessage());</span>
+<span class="nc" id="L45">				LOGGER.info(&quot;Please enter only a decimal!&quot;);</span>
+<span class="nc" id="L46">				scanner.nextLine();</span>
+<span class="nc" id="L47">			}</span>
+		}
+	}
+	
+	public static long getLong() {
+		@SuppressWarnings(&quot;resource&quot;)
+<span class="nc" id="L53">		Scanner scanner = new Scanner(System.in);</span>
+		while (true) {
+			try {
+<span class="nc" id="L56">				return scanner.nextLong();</span>
+<span class="nc" id="L57">			} catch (Exception e) {</span>
+<span class="nc" id="L58">				LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L59">				LOGGER.error(e.getMessage());</span>
+<span class="nc" id="L60">				LOGGER.info(&quot;Please enter only a number!&quot;);</span>
+<span class="nc" id="L61">				scanner.nextLine();</span>
+<span class="nc" id="L62">			}</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

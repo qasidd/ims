@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">qasidd-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.ims.controller</a> &gt; <span class="el_source">OrderController.java</span></div><h1>OrderController.java</h1><pre class="source lang-java linenums">package com.qa.ims.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.qa.action.OrderReadAction;
+import com.qa.action.OrderUpdateAction;
+import com.qa.ims.persistence.domain.Order;
+import com.qa.ims.services.CrudServicesExtended;
+import com.qa.ims.utils.Utils;
+
+/**
+ * Takes in order details for CRUD functionality
+ *
+ */
+public class OrderController implements CrudController&lt;Order&gt; {
+
+<span class="fc" id="L20">	public static final Logger LOGGER = Logger.getLogger(OrderController.class);</span>
+	
+	private CrudServicesExtended&lt;Order&gt; orderService;
+	
+<span class="fc" id="L24">	public OrderController(CrudServicesExtended&lt;Order&gt; orderService) {</span>
+<span class="fc" id="L25">		this.orderService = orderService;</span>
+<span class="fc" id="L26">	}</span>
+	
+
+	public String getInput() {
+<span class="nc" id="L30">		return Utils.getInput();</span>
+	}
+	
+	public Long getLong() {
+<span class="nc" id="L34">		return Utils.getLong();</span>
+	}
+	
+	// easier for testing
+	OrderUpdateAction getUpdateAction() {
+<span class="nc" id="L39">		return OrderUpdateAction.getAction();</span>
+	}
+	
+	OrderReadAction getReadAction() {
+<span class="nc" id="L43">		return OrderReadAction.getAction();</span>
+	}
+	
+	/**
+	 * Reads either all orders or one specific order to the logger
+	 */
+	@Override
+	public List&lt;Order&gt; read() {
+<span class="fc" id="L51">		LOGGER.info(&quot;Would you like to view all orders or the basket of one order?&quot;);</span>
+<span class="fc" id="L52">		OrderReadAction.printActions();</span>
+		
+<span class="fc" id="L54">		List&lt;Order&gt; orderList = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L55" title="1 of 3 branches missed.">		switch (getReadAction()) {</span>
+		case ALL:
+<span class="fc" id="L57">			orderList = readAll();</span>
+<span class="fc" id="L58">			break;</span>
+		case ONE:
+<span class="fc" id="L60">			orderList = readOne();</span>
+			break;
+		}
+
+<span class="fc" id="L64">		return orderList;</span>
+	}
+	
+	public List&lt;Order&gt; readAll() {
+<span class="fc" id="L68">		List&lt;Order&gt; orderList = orderService.readAll();</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">		for(Order order: orderList) {</span>
+<span class="fc" id="L70">			LOGGER.info(order.toString());</span>
+<span class="fc" id="L71">		}</span>
+		
+<span class="fc" id="L73">		return orderList;</span>
+	}
+	
+	public List&lt;Order&gt; readOne() {
+<span class="fc" id="L77">		LOGGER.info(&quot;Please enter the id of the order you would like to view the basket of&quot;);</span>
+<span class="fc" id="L78">		Long orderId = getLong();</span>
+<span class="fc" id="L79">		Order order = orderService.readById(orderId);</span>
+<span class="fc" id="L80">		double cost = orderService.calculateCost(order);</span>
+<span class="fc" id="L81">		List&lt;Order&gt; orderList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L82">		orderList.add(order);</span>
+		
+<span class="fc" id="L84">		LOGGER.info(orderList.get(0));</span>
+<span class="fc" id="L85">		String total = String.format(&quot;%.2f&quot;, cost);</span>
+<span class="fc" id="L86">		LOGGER.info(&quot;Total: �&quot; + total);</span>
+		
+<span class="fc" id="L88">		return orderList;</span>
+	}
+
+	/**
+	 * Creates a order by taking in user input
+	 */
+	@Override
+	public Order create() {
+<span class="fc" id="L96">		LOGGER.info(&quot;Please enter a customer ID&quot;);</span>
+<span class="fc" id="L97">		Long customerId = getLong();</span>
+<span class="fc" id="L98">		Order order = orderService.create(new Order(customerId));</span>
+<span class="fc" id="L99">		LOGGER.info(&quot;Order created&quot;);</span>
+<span class="fc" id="L100">		return order;</span>
+	}
+
+	/**
+	 * Updates an existing order by taking in user input
+	 */
+	@Override
+	public Order update() {
+<span class="fc" id="L108">		LOGGER.info(&quot;Please enter the id of the order you would like to update&quot;);</span>
+<span class="fc" id="L109">		Long id = getLong();</span>
+<span class="fc" id="L110">		LOGGER.info(&quot;Would you like to add or remove an item from order &quot; + id + &quot;?&quot;);</span>
+<span class="fc" id="L111">		OrderUpdateAction.printActions();</span>
+		
+<span class="fc" id="L113">		Order order = null;</span>
+<span class="pc bpc" id="L114" title="1 of 3 branches missed.">		switch(getUpdateAction()) {</span>
+		case ADD:
+<span class="fc" id="L116">			order = addTo(id);</span>
+<span class="fc" id="L117">			break;</span>
+		case DELETE:
+<span class="fc" id="L119">			order = deleteFrom(id);</span>
+			break;
+		}
+		
+<span class="fc" id="L123">		LOGGER.info(&quot;Order Updated&quot;);</span>
+<span class="fc" id="L124">		return order;</span>
+	}
+	
+	public Order addTo(long id) {
+<span class="fc" id="L128">		LOGGER.info(&quot;Please enter the id of the item you would like to add to order &quot; + id);</span>
+<span class="fc" id="L129">		Long itemId = getLong();</span>
+<span class="fc" id="L130">		return orderService.addTo(id, itemId);</span>
+	}
+	
+	public Order deleteFrom(long id) {
+<span class="fc" id="L134">		LOGGER.info(&quot;Please enter the id of the item you would like to delete from order &quot; + id);</span>
+<span class="fc" id="L135">		Long itemId = getLong();</span>
+<span class="fc" id="L136">		return orderService.deleteFrom(id, itemId);</span>
+	}
+
+	/**
+	 * Deletes an existing order by the id of the order
+	 */
+	@Override
+	public void delete() {
+<span class="fc" id="L144">		LOGGER.info(&quot;Please enter the id of the order you would like to delete&quot;);</span>
+<span class="fc" id="L145">		Long id = getLong();</span>
+<span class="fc" id="L146">		orderService.delete(id);</span>
+<span class="fc" id="L147">		LOGGER.info(&quot;Order Deleted&quot;);</span>
+<span class="fc" id="L148">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
